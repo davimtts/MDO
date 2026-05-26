@@ -1,0 +1,126 @@
+/* =============================================
+   ÍRIS CRM — Variáveis Globais
+   styles/variables.css
+   ============================================= */
+
+:root {
+  /* Accent / Brand */
+  --accent:          #F0464F;
+  --accent-hover:    #D93A42;
+  --accent-muted:    #C93039;
+  --accent-light:    rgba(240, 70, 79, 0.10);
+  --accent-glow:     rgba(240, 70, 79, 0.30);
+
+  /* Tipografia */
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  /* Bordas / Raios */
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   14px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-pill: 999px;
+
+  /* Transições */
+  --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --transition:  0.22s var(--ease);
+  --transition-slow: 0.38s var(--ease);
+
+  /* Z-index layers */
+  --z-bg:      0;
+  --z-base:    1;
+  --z-overlay: 10;
+  --z-modal:   100;
+  --z-toast:   200;
+}
+
+/* =============================================
+   TEMA CLARO (padrão)
+   ============================================= */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-primary:      #F5F4F1;
+  --bg-secondary:    #ECEAE6;
+  --bg-card:         #FFFFFF;
+  --bg-input:        #F0EEE9;
+  --bg-input-focus:  #FFFFFF;
+  --bg-hover:        #F7F6F3;
+
+  --text-primary:    #1C1917;
+  --text-secondary:  #6B6460;
+  --text-tertiary:   #9B9590;
+  --text-placeholder:#B5B0AB;
+
+  --border-color:    #E3E0DA;
+  --border-subtle:   #EAE8E3;
+  --border-focus:    var(--accent);
+
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-lg:   0 8px 32px rgba(0, 0, 0, 0.10), 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-btn:  0 4px 14px rgba(240, 70, 79, 0.32);
+  --shadow-btn-hover: 0 8px 24px rgba(240, 70, 79, 0.42);
+}
+
+/* =============================================
+   TEMA ESCURO (automático pelo sistema)
+   ============================================= */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --bg-primary:      #0D0C0B;
+    --bg-secondary:    #141210;
+    --bg-card:         #1A1816;
+    --bg-input:        #222019;
+    --bg-input-focus:  #29261F;
+    --bg-hover:        #1F1D1B;
+
+    --text-primary:    #F2F0EC;
+    --text-secondary:  #9B9590;
+    --text-tertiary:   #6B6460;
+    --text-placeholder:#4A4643;
+
+    --border-color:    #2E2B27;
+    --border-subtle:   #252320;
+    --border-focus:    var(--accent);
+
+    --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.30);
+    --shadow-md:   0 4px 20px rgba(0, 0, 0, 0.45), 0 1px 4px rgba(0, 0, 0, 0.25);
+    --shadow-lg:   0 12px 48px rgba(0, 0, 0, 0.60), 0 4px 12px rgba(0, 0, 0, 0.30);
+    --shadow-btn:  0 4px 16px rgba(240, 70, 79, 0.38);
+    --shadow-btn-hover: 0 8px 28px rgba(240, 70, 79, 0.50);
+  }
+}
+
+/* Tema escuro forçado via data-attribute */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg-primary:      #0D0C0B;
+  --bg-secondary:    #141210;
+  --bg-card:         #1A1816;
+  --bg-input:        #222019;
+  --bg-input-focus:  #29261F;
+  --bg-hover:        #1F1D1B;
+
+  --text-primary:    #F2F0EC;
+  --text-secondary:  #9B9590;
+  --text-tertiary:   #6B6460;
+  --text-placeholder:#4A4643;
+
+  --border-color:    #2E2B27;
+  --border-subtle:   #252320;
+  --border-focus:    var(--accent);
+
+  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.30);
+  --shadow-md:   0 4px 20px rgba(0, 0, 0, 0.45), 0 1px 4px rgba(0, 0, 0, 0.25);
+  --shadow-lg:   0 12px 48px rgba(0, 0, 0, 0.60), 0 4px 12px rgba(0, 0, 0, 0.30);
+  --shadow-btn:  0 4px 16px rgba(240, 70, 79, 0.38);
+  --shadow-btn-hover: 0 8px 28px rgba(240, 70, 79, 0.50);
+}

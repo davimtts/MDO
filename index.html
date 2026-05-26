@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Íris CRM</title>
+</head>
+
+<body>
+
+  <script type="module">
+
+    import { getSession, loginWithKey } from './scripts/services/authService.js';
+    import { ROUTES } from './scripts/utils/constants.js';
+
+    const params = new URLSearchParams(window.location.search);
+
+    const key = params.get('key');
+
+    async function init() {
+
+      // Se veio chave na URL
+      if (key) {
+
+        try {
+
+          await loginWithKey(key);
+
+          window.location.href = ROUTES.dashboard;
+
+          return;
+
+        } catch (error) {
+
+          console.error(error);
+
+          window.location.href = ROUTES.login;
+
+          return;
+
+        }
+
+      }
+
+      // Se já existe sessão salva
+      const session = getSession();
+
+      if (session) {
+
+        window.location.href = ROUTES.dashboard;
+
+        return;
+
+      }
+
+      // Se não tem nada
+      window.location.href = ROUTES.login;
+
+    }
+
+    init();
+
+  </script>
+
+</body>
+
+</html>
