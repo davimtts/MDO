@@ -1,12 +1,156 @@
 <script type="module" src="./scripts/pages/dashboard.js"></script>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./styles/global.css">
+  <link rel="stylesheet" href="./styles/pages/dashboard.css">
 </head>
+
 <body>
-    <button id="logoutButton">Sair</button>
+
+  <main class="app">
+
+    <header class="topbar">
+      <button id="logoutButton" class="icon-btn">↪</button>
+
+      <img src="./assets/logo/iris.png" alt="Íris" class="logo">
+
+      <button class="icon-btn notification-btn">
+        🔔
+        <span>3</span>
+      </button>
+    </header>
+
+    <section class="welcome">
+      <h1>Olá, <span id="userName">Sara</span>! 👋</h1>
+      <p>Vamos focar nos seus clientes de hoje.</p>
+    </section>
+
+    <section class="summary-grid">
+      <article class="summary-card">
+        <div class="summary-icon">👥</div>
+        <span>Novos clientes</span>
+        <strong id="newClientsCount">0</strong>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon">💰</div>
+        <span>Oportunidades</span>
+        <strong id="opportunitiesCount">0</strong>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon">🛍️</div>
+        <span>Orçamentos</span>
+        <strong id="budgetCount">0</strong>
+      </article>
+
+      <article class="summary-card">
+        <div class="summary-icon">🎯</div>
+        <span>Vendas fechadas</span>
+        <strong id="salesCount">0</strong>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Aguardando mensagem</h2>
+        <span id="pendingCount">0</span>
+      </div>
+
+      <div id="pendingList" class="client-list"></div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Clientes recentes</h2>
+        <button>Ver todos</button>
+      </div>
+
+      <div id="recentClientsList" class="client-list"></div>
+    </section>
+
+    <section class="panel chart-placeholder">
+      <div class="panel-header">
+        <h2>Vendas neste ano</h2>
+        <strong>R$ 0,00</strong>
+      </div>
+
+      <div class="fake-chart">
+        <span></span>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <a class="active">🏠<span>Dashboard</span></a>
+    <a>👤<span>Clientes</span></a>
+
+    <button id="openClientModal" class="add-btn">+</button>
+
+    <a>💼<span>Oportunidades</span></a>
+    <a>•••<span>Mais</span></a>
+  </nav>
+
+  <section id="clientModal" class="modal hidden">
+    <div class="modal-card">
+
+      <div class="modal-header">
+        <h2>Novo cliente</h2>
+        <button id="closeClientModal">×</button>
+      </div>
+
+      <form id="clientForm">
+
+        <h3>Dados do cliente</h3>
+
+        <input id="clientName" type="text" placeholder="Nome do cliente" required>
+        <input id="clientPhone" type="text" placeholder="Telefone" required>
+
+        <select id="clientOrigin">
+          <option value="trafego_pago">Tráfego Pago</option>
+          <option value="loja_fisica">Loja Física</option>
+        </select>
+
+        <textarea id="clientObs" placeholder="Observação do cliente"></textarea>
+
+        <h3>Primeiro item / serviço</h3>
+
+        <input id="itemName" type="text" placeholder="Ex: Armação + lentes" required>
+        <input id="itemPrice" type="number" placeholder="Preço" min="0" step="0.01">
+
+        <select id="itemStatus">
+          <option value="so_passou">Só passou</option>
+          <option value="futuramente">Futuramente</option>
+          <option value="analisando_orcamento">Analisando orçamento</option>
+          <option value="aguardando_mensagem">Aguardando mensagem</option>
+          <option value="concluido">Concluído</option>
+        </select>
+
+        <select id="itemTemperature">
+          <option value="frio">Frio</option>
+          <option value="morno">Morno</option>
+          <option value="quente">Quente</option>
+        </select>
+
+        <textarea id="itemObs" placeholder="Observação do item"></textarea>
+
+        <button type="submit">Salvar cliente</button>
+
+        <p id="clientFormMessage"></p>
+
+      </form>
+
+    </div>
+  </section>
+
+  <script type="module" src="./scripts/pages/dashboard.js"></script>
+
 </body>
+
 </html>

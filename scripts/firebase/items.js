@@ -8,19 +8,19 @@ import {
 
 import { db } from "./config.js";
 
-const clientsRef = collection(db, "clients");
+const itemsRef = collection(db, "items");
 
-export async function saveClient(client) {
-  const docRef = await addDoc(clientsRef, client);
+export async function saveItem(item) {
+  const docRef = await addDoc(itemsRef, item);
 
   return {
     id: docRef.id,
-    ...client
+    ...item
   };
 }
 
-export async function getClients() {
-  const q = query(clientsRef, orderBy("client_data_create", "desc"));
+export async function getItems() {
+  const q = query(itemsRef, orderBy("item_data_create", "desc"));
 
   const snapshot = await getDocs(q);
 
