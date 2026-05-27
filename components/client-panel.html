@@ -1,0 +1,94 @@
+<section id="clientPanel" class="modal hidden">
+    <div class="modal__backdrop" data-close-client-panel></div>
+
+    <div class="modal__card">
+        <div class="modal__header">
+            <h2 class="modal__title">Cliente</h2>
+
+            <button id="closeClientPanel" class="modal__close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <form id="clientPanelForm" class="modal__form">
+
+            <input type="hidden" id="panelClientId">
+
+            <div class="form-section">
+                <h3 class="form-section__title">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Dados do cliente
+                </h3>
+
+                <div class="field-group">
+                    <label for="panelClientName" class="field-label">Nome</label>
+
+                    <div class="field-input-wrap">
+                        <span class="field-icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+
+                        <input id="panelClientName" class="field-input" type="text" placeholder="Nome completo"
+                            required>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="panelClientPhone" class="field-label">Telefone</label>
+
+                    <div class="field-input-wrap">
+                        <span class="field-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </span>
+
+                        <input id="panelClientPhone" class="field-input" type="text" placeholder="(00) 00000-0000"
+                            required>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="panelClientOrigin" class="field-label">Origem</label>
+
+                    <div class="field-input-wrap field-input-wrap--select">
+                        <span class="field-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </span>
+
+                        <select id="panelClientOrigin" class="field-input field-select">
+                            <option value="trafego_pago">Tráfego Pago</option>
+                            <option value="loja_fisica">Loja Física</option>
+                        </select>
+
+                        <span class="field-chevron">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="panelClientObs" class="field-label">Observação</label>
+
+                    <textarea id="panelClientObs" class="field-textarea"
+                        placeholder="Observações sobre o cliente..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="client-panel__items-header">
+                    <h3 class="form-section__title">Interesses</h3>
+                    <button type="button" id="addInterestButton" class="panel__action">
+                        + Criar interesse
+                    </button>
+                </div>
+
+                <div id="clientInterestsList" class="client-panel__items"></div>
+            </div>
+
+            <button type="submit" class="modal__submit">
+                Salvar alterações
+            </button>
+
+            <p id="clientPanelMessage" class="modal__message"></p>
+        </form>
+    </div>
+</section>

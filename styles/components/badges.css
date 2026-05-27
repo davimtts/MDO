@@ -1,0 +1,36 @@
+.badge {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge-so_passou {
+  background: var(--badge-passed-bg);
+  color: var(--badge-passed-text);
+}
+
+.badge-futuramente {
+  background: var(--badge-future-bg);
+  color: var(--badge-future-text);
+}
+
+.badge-analisando_orcamento {
+  background: var(--badge-budget-bg);
+  color: var(--badge-budget-text);
+}
+
+.badge-aguardando_mensagem {
+  background: var(--badge-waiting-bg);
+  color: var(--badge-waiting-text);
+}
+
+.badge-concluido {
+  background: var(--badge-done-bg);
+  color: var(--badge-done-text);
+}

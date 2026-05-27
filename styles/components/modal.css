@@ -1,0 +1,139 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 8, 6, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 0.25s var(--ease) both;
+}
+
+.modal__card {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 0 0 32px;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.38s var(--ease-out) both;
+}
+
+.modal__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 14px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.modal__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: -0.02em;
+}
+
+.modal__title i {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.modal__close {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-xs);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  display: grid;
+  place-items: center;
+  transition: background var(--transition), color var(--transition);
+}
+
+.modal__close:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.modal__form {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__submit {
+  margin-top: 20px;
+}
+
+.modal__message {
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--accent);
+  min-height: 20px;
+  margin-top: 8px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0.6;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 900px) {
+  .modal {
+    align-items: center;
+  }
+
+  .modal__card {
+    border-radius: var(--radius-lg);
+    max-height: 85vh;
+    max-height: 85dvh;
+    animation: modalIn 0.32s var(--ease-out) both;
+  }
+
+  @keyframes modalIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+}

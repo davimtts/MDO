@@ -4,7 +4,9 @@ import {
   getDocs,
   query,
   orderBy,
-  where
+  where,
+  doc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import { db } from "./config.js";
@@ -33,4 +35,15 @@ export async function getClients(userId) {
     id: doc.id,
     ...doc.data()
   }));
+}
+
+export async function updateClient(clientId, data) {
+  const ref = doc(db, "clients", clientId);
+
+  await updateDoc(ref, data);
+
+  return {
+    id: clientId,
+    ...data
+  };
 }

@@ -3,7 +3,9 @@ import {
   addDoc,
   getDocs,
   query,
-  orderBy
+  orderBy,
+  doc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import { db } from "./config.js";
@@ -28,4 +30,15 @@ export async function getItems() {
     id: doc.id,
     ...doc.data()
   }));
+}
+
+export async function updateItem(itemId, data) {
+  const ref = doc(db, "items", itemId);
+
+  await updateDoc(ref, data);
+
+  return {
+    id: itemId,
+    ...data
+  };
 }

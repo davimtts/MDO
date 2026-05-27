@@ -1,7 +1,18 @@
+import { loadSharedLayout } from "../app/loadComponents.js";
+
+await loadSharedLayout();
+
 import { checkAuth } from "../app/auth.js";
 import { getSession, logout } from "../services/authService.js";
-import { createClientWithItem, getDashboardData } from "../services/clientService.js";
+import { getDashboardData } from "../services/clientService.js";
 import { ROUTES } from "../utils/constants.js";
+
+import { initClientCreateModal } from "../ui/clientCreateModal.js";
+import {
+  initClientPanel,
+  openClientPanel,
+  setClientPanelData
+} from "../ui/clientPanel.js";
 
 await checkAuth();
 
@@ -9,13 +20,6 @@ const session = getSession();
 
 const userName = document.getElementById("userName");
 const logoutButton = document.getElementById("logoutButton");
-
-const modal = document.getElementById("clientModal");
-const openModalButton = document.getElementById("openClientModal");
-const closeModalButton = document.getElementById("closeClientModal");
-
-const form = document.getElementById("clientForm");
-const formMessage = document.getElementById("clientFormMessage");
 
 const recentClientsList = document.getElementById("recentClientsList");
 const pendingList = document.getElementById("pendingList");
@@ -25,6 +29,12 @@ const opportunitiesCount = document.getElementById("opportunitiesCount");
 const budgetCount = document.getElementById("budgetCount");
 const salesCount = document.getElementById("salesCount");
 const pendingCount = document.getElementById("pendingCount");
+
+let dashboardCache = {
+  clients: [],
+  items: [],
+  clientsWithItems: []
+};
 
 if (userName && session?.name) {
   userName.textContent = session.name;
@@ -37,20 +47,6 @@ if (logoutButton) {
   });
 }
 
-openModalButton.addEventListener("click", () => {
-  modal.classList.remove("hidden");
-});
-
-closeModalButton.addEventListener("click", () => {
-  modal.classList.add("hidden");
-});
-
-modal.addEventListener("click", event => {
-  if (event.target === modal) {
-    modal.classList.add("hidden");
-  }
-});
-
 function getInitials(name) {
   return name
     .split(" ")
@@ -61,9 +57,24 @@ function getInitials(name) {
 }
 
 function formatMoney(value) {
-  return Number(value || 0).toLocaleString("pt-BR", {
+  const number = Number(value);
+
+  if (!number || number <= 0) {
+    return "R$---";
+  }
+
+  return number.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL"
+  });
+}
+
+function formatShortDate(date) {
+  if (!date) return "--/--";
+
+  return new Date(date).toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit"
   });
 }
 
@@ -87,22 +98,36 @@ function renderClientRow(client, item) {
     <div class="avatar">${getInitials(client.client_nome)}</div>
 
     <div class="client-info">
-      <strong>${client.client_nome}</strong>
-      <span>${item?.item_nome || "Sem item cadastrado"}</span>
+      <strong class="client-info__name">${client.client_nome}</strong>
+      <span class="client-info__sub">${item?.item_nome || "Sem item cadastrado"}</span>
       ${item ? `<small class="badge badge-${item.item_status}">${formatStatus(item.item_status)}</small>` : ""}
     </div>
 
     <div class="client-meta">
-      <strong>${formatMoney(item?.item_preco || 0)}</strong>
-      <span>${new Date(client.client_data_create).toLocaleDateString("pt-BR")}</span>
+      <strong class="client-meta__price">${formatMoney(item?.item_preco || 0)}</strong>
+      <span>${formatShortDate(client.client_data_create)}</span>
     </div>
   `;
+
+  row.addEventListener("click", () => {
+    openClientPanel(client.id);
+  });
 
   return row;
 }
 
 async function renderDashboard() {
   const { clients, items, clientsWithItems } = await getDashboardData();
+
+  dashboardCache = {
+    clients,
+    items,
+    clientsWithItems
+  };
+
+  setClientPanelData({
+    clientsWithItems
+  });
 
   recentClientsList.innerHTML = "";
   pendingList.innerHTML = "";
@@ -156,37 +181,19 @@ async function renderDashboard() {
   });
 }
 
-form.addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const clientData = {
-    client_nome: document.getElementById("clientName").value,
-    client_telefone: document.getElementById("clientPhone").value,
-    client_origem: document.getElementById("clientOrigin").value,
-    client_obs: document.getElementById("clientObs").value
-  };
-
-  const itemData = {
-    item_nome: document.getElementById("itemName").value,
-    item_preco: document.getElementById("itemPrice").value,
-    item_status: document.getElementById("itemStatus").value,
-    item_temperatura: document.getElementById("itemTemperature").value,
-    item_obs: document.getElementById("itemObs").value
-  };
-
-  try {
-    formMessage.textContent = "Salvando...";
-
-    await createClientWithItem(clientData, itemData);
-
-    form.reset();
-    modal.classList.add("hidden");
-    formMessage.textContent = "";
-
+initClientCreateModal({
+  onSuccess: async result => {
     await renderDashboard();
 
-  } catch (error) {
-    formMessage.textContent = error.message;
+    if (result?.client?.id) {
+      openClientPanel(result.client.id);
+    }
+  }
+});
+
+initClientPanel({
+  onSuccess: async () => {
+    await renderDashboard();
   }
 });
 

@@ -1,0 +1,35 @@
+.client-panel__items-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.client-panel__items {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.interest-card {
+  padding: 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+}
+
+.interest-card__title {
+  margin-bottom: 12px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+
+.empty-interest {
+  padding: 18px;
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-tertiary);
+  text-align: center;
+  font-size: 0.86rem;
+}

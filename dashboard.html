@@ -1,82 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Íris | Dashboard</title>
+  <title>ÍRIS - CRM</title>
+  <link rel="icon" href="./assets/icons/iris.ico" type="image/x-icon">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="./styles/variables.css">
   <link rel="stylesheet" href="./styles/global.css">
+
+  <link rel="stylesheet" href="./styles/components/toast.css">
+  <link rel="stylesheet" href="./styles/components/modal.css">
+  <link rel="stylesheet" href="./styles/components/form.css">
+  <link rel="stylesheet" href="./styles/components/badges.css">
+  <link rel="stylesheet" href="./styles/components/client-list.css">
+  <link rel="stylesheet" href="./styles/components/client-panel.css">
+  <link rel="stylesheet" href="./styles/components/bottom-nav.css">
+  <link rel="stylesheet" href="./styles/components/sidebar.css">
+
   <link rel="stylesheet" href="./styles/pages/dashboard.css">
 </head>
+
 <body>
 
-  <!-- ==============================
-       SIDEBAR (desktop)
-       ============================== -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar__top">
-      <a href="#" class="sidebar__brand">
-        <img src="./assets/logo/iris.png" alt="Íris CRM" class="sidebar__logo">
-      </a>
-    </div>
-
-    <nav class="sidebar__nav" aria-label="Navegação principal">
-      <a href="#" class="sidebar__link active" data-page="dashboard">
-        <i class="fa-solid fa-house sidebar__link-icon"></i>
-        <span>Dashboard</span>
-      </a>
-      <a href="#" class="sidebar__link" data-page="clients">
-        <i class="fa-solid fa-user sidebar__link-icon"></i>
-        <span>Clientes</span>
-      </a>
-      <a href="#" class="sidebar__link" data-page="opportunities">
-        <i class="fa-solid fa-briefcase sidebar__link-icon"></i>
-        <span>Oportunidades</span>
-      </a>
-      <a href="#" class="sidebar__link" data-page="kanban">
-        <i class="fa-solid fa-table-columns sidebar__link-icon"></i>
-        <span>Kanban</span>
-      </a>
-      <a href="#" class="sidebar__link" data-page="reminders">
-        <i class="fa-solid fa-bell sidebar__link-icon"></i>
-        <span>Lembretes</span>
-        <span class="sidebar__badge">3</span>
-      </a>
-    </nav>
-
-    <div class="sidebar__bottom">
-      <button id="logoutButtonDesktop" class="sidebar__logout">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
-        <span>Sair</span>
-      </button>
-    </div>
-  </aside>
-
-  <!-- ==============================
-       TOPBAR (mobile)
-       ============================== -->
-  <header class="topbar" id="topbar">
-    <button id="logoutButton" class="topbar__btn" aria-label="Sair">
-      <i class="fa-solid fa-arrow-right-from-bracket"></i>
-    </button>
-
-    <img src="./assets/logo/iris.png" alt="Íris CRM" class="topbar__logo">
-
-    <button class="topbar__btn topbar__notifications" aria-label="Notificações">
-      <i class="fa-solid fa-bell"></i>
-      <span class="topbar__badge" aria-label="3 notificações">3</span>
-    </button>
-  </header>
+  <div id="sidebar-root"></div>
+  <div id="topbar-root"></div>
 
   <!-- ==============================
        MAIN CONTENT
@@ -202,160 +161,11 @@
     </div><!-- /dashboard-grid -->
   </main>
 
-  <!-- ==============================
-       BOTTOM NAV (mobile)
-       ============================== -->
-  <nav class="bottom-nav" aria-label="Navegação">
-    <a href="#" class="bottom-nav__link active" data-page="dashboard" aria-label="Dashboard">
-      <i class="fa-solid fa-house bottom-nav__icon"></i>
-      <span class="bottom-nav__label">Dashboard</span>
-    </a>
-    <a href="#" class="bottom-nav__link" data-page="clients" aria-label="Clientes">
-      <i class="fa-solid fa-user bottom-nav__icon"></i>
-      <span class="bottom-nav__label">Clientes</span>
-    </a>
-
-    <button id="openClientModal" class="bottom-nav__fab" aria-label="Adicionar cliente">
-      <i class="fa-solid fa-plus"></i>
-    </button>
-
-    <a href="#" class="bottom-nav__link" data-page="opportunities" aria-label="Oportunidades">
-      <i class="fa-solid fa-briefcase bottom-nav__icon"></i>
-      <span class="bottom-nav__label">Oport.</span>
-    </a>
-    <a href="#" class="bottom-nav__link" data-page="more" aria-label="Mais opções">
-      <i class="fa-solid fa-ellipsis bottom-nav__icon"></i>
-      <span class="bottom-nav__label">Mais</span>
-    </a>
-  </nav>
-
-  <!-- ==============================
-       MODAL: Novo Cliente
-       ============================== -->
-  <div id="clientModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal__backdrop" id="modalBackdrop"></div>
-
-    <div class="modal__card">
-      <div class="modal__header">
-        <h2 class="modal__title" id="modalTitle">
-          <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
-          Novo cliente
-        </h2>
-        <button id="closeClientModal" class="modal__close" aria-label="Fechar modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <form id="clientForm" class="modal__form" novalidate>
-
-        <div class="form-section">
-          <h3 class="form-section__title">
-            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-            Dados do cliente
-          </h3>
-
-          <div class="field-group">
-            <label for="clientName" class="field-label">Nome</label>
-            <div class="field-input-wrap">
-              <span class="field-icon"><i class="fa-solid fa-user"></i></span>
-              <input id="clientName" type="text" class="field-input" placeholder="Nome completo" required>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label for="clientPhone" class="field-label">Telefone</label>
-            <div class="field-input-wrap">
-              <span class="field-icon"><i class="fa-solid fa-phone"></i></span>
-              <input id="clientPhone" type="tel" class="field-input" placeholder="(00) 00000-0000" required>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label for="clientOrigin" class="field-label">Origem</label>
-            <div class="field-input-wrap field-input-wrap--select">
-              <span class="field-icon"><i class="fa-solid fa-location-dot"></i></span>
-              <select id="clientOrigin" class="field-input field-select">
-                <option value="trafego_pago">Tráfego Pago</option>
-                <option value="loja_fisica">Loja Física</option>
-              </select>
-              <span class="field-chevron"><i class="fa-solid fa-chevron-down"></i></span>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label for="clientObs" class="field-label">Observação</label>
-            <textarea id="clientObs" class="field-textarea" placeholder="Observações sobre o cliente..."></textarea>
-          </div>
-        </div>
-
-        <div class="form-section">
-          <h3 class="form-section__title">
-            <i class="fa-solid fa-tag" aria-hidden="true"></i>
-            Primeiro item / serviço
-          </h3>
-
-          <div class="field-group">
-            <label for="itemName" class="field-label">Descrição</label>
-            <div class="field-input-wrap">
-              <span class="field-icon"><i class="fa-solid fa-glasses"></i></span>
-              <input id="itemName" type="text" class="field-input" placeholder="Ex: Armação + lentes" required>
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field-group">
-              <label for="itemPrice" class="field-label">Preço</label>
-              <div class="field-input-wrap">
-                <span class="field-icon"><i class="fa-solid fa-brazilian-real-sign"></i></span>
-                <input id="itemPrice" type="number" class="field-input" placeholder="0,00" min="0" step="0.01">
-              </div>
-            </div>
-
-            <div class="field-group">
-              <label for="itemTemperature" class="field-label">Temperatura</label>
-              <div class="field-input-wrap field-input-wrap--select">
-                <span class="field-icon"><i class="fa-solid fa-fire"></i></span>
-                <select id="itemTemperature" class="field-input field-select">
-                  <option value="frio">❄️ Frio</option>
-                  <option value="morno">🌤 Morno</option>
-                  <option value="quente">🔥 Quente</option>
-                </select>
-                <span class="field-chevron"><i class="fa-solid fa-chevron-down"></i></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label for="itemStatus" class="field-label">Status</label>
-            <div class="field-input-wrap field-input-wrap--select">
-              <span class="field-icon"><i class="fa-solid fa-flag"></i></span>
-              <select id="itemStatus" class="field-input field-select">
-                <option value="so_passou">Só passou</option>
-                <option value="futuramente">Futuramente</option>
-                <option value="analisando_orcamento">Analisando orçamento</option>
-                <option value="aguardando_mensagem">Aguardando mensagem</option>
-                <option value="concluido">Concluído</option>
-              </select>
-              <span class="field-chevron"><i class="fa-solid fa-chevron-down"></i></span>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label for="itemObs" class="field-label">Observação do item</label>
-            <textarea id="itemObs" class="field-textarea" placeholder="Detalhes adicionais..."></textarea>
-          </div>
-        </div>
-
-        <button type="submit" class="login-btn modal__submit">
-          <span class="login-btn__text">Salvar cliente</span>
-          <i class="fa-solid fa-arrow-right login-btn__icon"></i>
-        </button>
-
-        <p id="clientFormMessage" class="modal__message" role="alert" aria-live="polite"></p>
-      </form>
-    </div>
-  </div>
+  <div id="bottom-nav-root"></div>
+  <div id="client-create-modal-root"></div>
+  <div id="client-panel-root"></div>
+  <div id="toast-root"></div>
 
   <script type="module" src="./scripts/pages/dashboard.js"></script>
-</body>
+
 </html>
