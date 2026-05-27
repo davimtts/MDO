@@ -32,9 +32,34 @@
   /* Z-index layers */
   --z-bg:      0;
   --z-base:    1;
+  --z-nav:     20;
   --z-overlay: 10;
   --z-modal:   100;
   --z-toast:   200;
+
+  /* Status / Badge colors */
+  --badge-cold-bg:     rgba(99, 179, 237, 0.14);
+  --badge-cold-text:   #3B97CC;
+  --badge-warm-bg:     rgba(237, 173, 74, 0.14);
+  --badge-warm-text:   #C88B1A;
+  --badge-hot-bg:      rgba(240, 70, 79, 0.14);
+  --badge-hot-text:    var(--accent);
+
+  --badge-passed-bg:   rgba(240, 70, 79, 0.10);
+  --badge-passed-text: var(--accent);
+  --badge-future-bg:   rgba(237, 173, 74, 0.12);
+  --badge-future-text: #B87E14;
+  --badge-budget-bg:   rgba(248, 141, 77, 0.12);
+  --badge-budget-text: #C4631A;
+  --badge-waiting-bg:  rgba(139, 92, 246, 0.12);
+  --badge-waiting-text:#7C5CDB;
+  --badge-done-bg:     rgba(52, 199, 123, 0.12);
+  --badge-done-text:   #1E9E62;
+
+  /* Sidebar */
+  --sidebar-width:     240px;
+  --topbar-height:     64px;
+  --bottomnav-height:  72px;
 }
 
 /* =============================================

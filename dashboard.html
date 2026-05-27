@@ -1,156 +1,361 @@
-<script type="module" src="./scripts/pages/dashboard.js"></script>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Íris | Dashboard</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles/variables.css">
   <link rel="stylesheet" href="./styles/global.css">
   <link rel="stylesheet" href="./styles/pages/dashboard.css">
 </head>
-
 <body>
 
-  <main class="app">
+  <!-- ==============================
+       SIDEBAR (desktop)
+       ============================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__top">
+      <a href="#" class="sidebar__brand">
+        <img src="./assets/logo/iris.png" alt="Íris CRM" class="sidebar__logo">
+      </a>
+    </div>
 
-    <header class="topbar">
-      <button id="logoutButton" class="icon-btn">↪</button>
-
-      <img src="./assets/logo/iris.png" alt="Íris" class="logo">
-
-      <button class="icon-btn notification-btn">
-        🔔
-        <span>3</span>
-      </button>
-    </header>
-
-    <section class="welcome">
-      <h1>Olá, <span id="userName">Sara</span>! 👋</h1>
-      <p>Vamos focar nos seus clientes de hoje.</p>
-    </section>
-
-    <section class="summary-grid">
-      <article class="summary-card">
-        <div class="summary-icon">👥</div>
-        <span>Novos clientes</span>
-        <strong id="newClientsCount">0</strong>
-      </article>
-
-      <article class="summary-card">
-        <div class="summary-icon">💰</div>
+    <nav class="sidebar__nav" aria-label="Navegação principal">
+      <a href="#" class="sidebar__link active" data-page="dashboard">
+        <i class="fa-solid fa-house sidebar__link-icon"></i>
+        <span>Dashboard</span>
+      </a>
+      <a href="#" class="sidebar__link" data-page="clients">
+        <i class="fa-solid fa-user sidebar__link-icon"></i>
+        <span>Clientes</span>
+      </a>
+      <a href="#" class="sidebar__link" data-page="opportunities">
+        <i class="fa-solid fa-briefcase sidebar__link-icon"></i>
         <span>Oportunidades</span>
-        <strong id="opportunitiesCount">0</strong>
+      </a>
+      <a href="#" class="sidebar__link" data-page="kanban">
+        <i class="fa-solid fa-table-columns sidebar__link-icon"></i>
+        <span>Kanban</span>
+      </a>
+      <a href="#" class="sidebar__link" data-page="reminders">
+        <i class="fa-solid fa-bell sidebar__link-icon"></i>
+        <span>Lembretes</span>
+        <span class="sidebar__badge">3</span>
+      </a>
+    </nav>
+
+    <div class="sidebar__bottom">
+      <button id="logoutButtonDesktop" class="sidebar__logout">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Sair</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==============================
+       TOPBAR (mobile)
+       ============================== -->
+  <header class="topbar" id="topbar">
+    <button id="logoutButton" class="topbar__btn" aria-label="Sair">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+    </button>
+
+    <img src="./assets/logo/iris.png" alt="Íris CRM" class="topbar__logo">
+
+    <button class="topbar__btn topbar__notifications" aria-label="Notificações">
+      <i class="fa-solid fa-bell"></i>
+      <span class="topbar__badge" aria-label="3 notificações">3</span>
+    </button>
+  </header>
+
+  <!-- ==============================
+       MAIN CONTENT
+       ============================== -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Boas-vindas -->
+    <section class="welcome" aria-label="Boas-vindas">
+      <div class="welcome__text">
+        <h1 class="welcome__title">
+          Olá, <span class="welcome__name" id="userName">Sara</span>!
+          <i class="fa-solid fa-hand-wave welcome__wave" aria-hidden="true"></i>
+        </h1>
+        <p class="welcome__subtitle">Vamos focar nos seus clientes de hoje.</p>
+      </div>
+
+      <!-- Notificações desktop (visível apenas no desktop) -->
+      <button class="welcome__notifications" aria-label="Notificações">
+        <i class="fa-solid fa-bell"></i>
+        <span class="topbar__badge">3</span>
+      </button>
+    </section>
+
+    <!-- Cards de resumo -->
+    <section class="summary-grid" aria-label="Resumo">
+      <article class="summary-card" style="--i:0">
+        <div class="summary-card__icon">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+        <span class="summary-card__label">Novos clientes</span>
+        <strong class="summary-card__value" id="newClientsCount">0</strong>
       </article>
 
-      <article class="summary-card">
-        <div class="summary-icon">🛍️</div>
-        <span>Orçamentos</span>
-        <strong id="budgetCount">0</strong>
+      <article class="summary-card" style="--i:1">
+        <div class="summary-card__icon">
+          <i class="fa-solid fa-sack-dollar"></i>
+        </div>
+        <span class="summary-card__label">Oportunidades</span>
+        <strong class="summary-card__value" id="opportunitiesCount">0</strong>
       </article>
 
-      <article class="summary-card">
-        <div class="summary-icon">🎯</div>
-        <span>Vendas fechadas</span>
-        <strong id="salesCount">0</strong>
+      <article class="summary-card" style="--i:2">
+        <div class="summary-card__icon">
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+        </div>
+        <span class="summary-card__label">Orçamentos</span>
+        <strong class="summary-card__value" id="budgetCount">0</strong>
+      </article>
+
+      <article class="summary-card" style="--i:3">
+        <div class="summary-card__icon summary-card__icon--accent">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <span class="summary-card__label">Vendas fechadas</span>
+        <strong class="summary-card__value summary-card__value--accent" id="salesCount">0</strong>
       </article>
     </section>
 
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Aguardando mensagem</h2>
-        <span id="pendingCount">0</span>
-      </div>
+    <!-- Grid inferior: lista + gráfico -->
+    <div class="dashboard-grid">
 
-      <div id="pendingList" class="client-list"></div>
-    </section>
+      <!-- Aguardando mensagem -->
+      <section class="panel" aria-label="Aguardando mensagem">
+        <div class="panel__header">
+          <h2 class="panel__title">
+            <i class="fa-solid fa-clock panel__title-icon" aria-hidden="true"></i>
+            Aguardando mensagem
+          </h2>
+          <span class="panel__count" id="pendingCount" aria-label="quantidade pendente">0</span>
+        </div>
+        <div id="pendingList" class="client-list" role="list"></div>
+        <div class="client-list--empty" id="pendingEmpty">
+          <i class="fa-regular fa-circle-check"></i>
+          <span>Nenhum pendente</span>
+        </div>
+      </section>
 
-    <section class="panel">
-      <div class="panel-header">
-        <h2>Clientes recentes</h2>
-        <button>Ver todos</button>
-      </div>
+      <!-- Clientes recentes -->
+      <section class="panel" aria-label="Clientes recentes">
+        <div class="panel__header">
+          <h2 class="panel__title">
+            <i class="fa-solid fa-users panel__title-icon" aria-hidden="true"></i>
+            Clientes recentes
+          </h2>
+          <button class="panel__action">
+            Ver todos <i class="fa-solid fa-arrow-right" style="font-size:10px"></i>
+          </button>
+        </div>
+        <div id="recentClientsList" class="client-list" role="list"></div>
+        <div class="client-list--empty" id="recentEmpty">
+          <i class="fa-regular fa-user"></i>
+          <span>Nenhum cliente ainda</span>
+        </div>
+      </section>
 
-      <div id="recentClientsList" class="client-list"></div>
-    </section>
+      <!-- Gráfico de vendas -->
+      <section class="panel chart-panel" aria-label="Vendas no ano">
+        <div class="panel__header">
+          <h2 class="panel__title">
+            <i class="fa-solid fa-chart-line panel__title-icon" aria-hidden="true"></i>
+            Vendas neste ano
+          </h2>
+          <strong class="chart-panel__total" id="totalSales">R$ 0,00</strong>
+        </div>
+        <div class="chart-wrap" aria-hidden="true">
+          <div class="chart-bars">
+            <div class="chart-bar" style="--h:38%"><span>Jan</span></div>
+            <div class="chart-bar" style="--h:55%"><span>Fev</span></div>
+            <div class="chart-bar" style="--h:42%"><span>Mar</span></div>
+            <div class="chart-bar" style="--h:70%"><span>Abr</span></div>
+            <div class="chart-bar" style="--h:60%"><span>Mai</span></div>
+            <div class="chart-bar chart-bar--active" style="--h:84%"><span>Jun</span></div>
+            <div class="chart-bar" style="--h:0%"><span>Jul</span></div>
+            <div class="chart-bar" style="--h:0%"><span>Ago</span></div>
+            <div class="chart-bar" style="--h:0%"><span>Set</span></div>
+            <div class="chart-bar" style="--h:0%"><span>Out</span></div>
+            <div class="chart-bar" style="--h:0%"><span>Nov</span></div>
+            <div class="chart-bar" style="--h:0%"><span>Dez</span></div>
+          </div>
+        </div>
+      </section>
 
-    <section class="panel chart-placeholder">
-      <div class="panel-header">
-        <h2>Vendas neste ano</h2>
-        <strong>R$ 0,00</strong>
-      </div>
-
-      <div class="fake-chart">
-        <span></span>
-      </div>
-    </section>
-
+    </div><!-- /dashboard-grid -->
   </main>
 
-  <nav class="bottom-nav">
-    <a class="active">🏠<span>Dashboard</span></a>
-    <a>👤<span>Clientes</span></a>
+  <!-- ==============================
+       BOTTOM NAV (mobile)
+       ============================== -->
+  <nav class="bottom-nav" aria-label="Navegação">
+    <a href="#" class="bottom-nav__link active" data-page="dashboard" aria-label="Dashboard">
+      <i class="fa-solid fa-house bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Dashboard</span>
+    </a>
+    <a href="#" class="bottom-nav__link" data-page="clients" aria-label="Clientes">
+      <i class="fa-solid fa-user bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Clientes</span>
+    </a>
 
-    <button id="openClientModal" class="add-btn">+</button>
+    <button id="openClientModal" class="bottom-nav__fab" aria-label="Adicionar cliente">
+      <i class="fa-solid fa-plus"></i>
+    </button>
 
-    <a>💼<span>Oportunidades</span></a>
-    <a>•••<span>Mais</span></a>
+    <a href="#" class="bottom-nav__link" data-page="opportunities" aria-label="Oportunidades">
+      <i class="fa-solid fa-briefcase bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Oport.</span>
+    </a>
+    <a href="#" class="bottom-nav__link" data-page="more" aria-label="Mais opções">
+      <i class="fa-solid fa-ellipsis bottom-nav__icon"></i>
+      <span class="bottom-nav__label">Mais</span>
+    </a>
   </nav>
 
-  <section id="clientModal" class="modal hidden">
-    <div class="modal-card">
+  <!-- ==============================
+       MODAL: Novo Cliente
+       ============================== -->
+  <div id="clientModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal__backdrop" id="modalBackdrop"></div>
 
-      <div class="modal-header">
-        <h2>Novo cliente</h2>
-        <button id="closeClientModal">×</button>
+    <div class="modal__card">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modalTitle">
+          <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+          Novo cliente
+        </h2>
+        <button id="closeClientModal" class="modal__close" aria-label="Fechar modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
-      <form id="clientForm">
+      <form id="clientForm" class="modal__form" novalidate>
 
-        <h3>Dados do cliente</h3>
+        <div class="form-section">
+          <h3 class="form-section__title">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            Dados do cliente
+          </h3>
 
-        <input id="clientName" type="text" placeholder="Nome do cliente" required>
-        <input id="clientPhone" type="text" placeholder="Telefone" required>
+          <div class="field-group">
+            <label for="clientName" class="field-label">Nome</label>
+            <div class="field-input-wrap">
+              <span class="field-icon"><i class="fa-solid fa-user"></i></span>
+              <input id="clientName" type="text" class="field-input" placeholder="Nome completo" required>
+            </div>
+          </div>
 
-        <select id="clientOrigin">
-          <option value="trafego_pago">Tráfego Pago</option>
-          <option value="loja_fisica">Loja Física</option>
-        </select>
+          <div class="field-group">
+            <label for="clientPhone" class="field-label">Telefone</label>
+            <div class="field-input-wrap">
+              <span class="field-icon"><i class="fa-solid fa-phone"></i></span>
+              <input id="clientPhone" type="tel" class="field-input" placeholder="(00) 00000-0000" required>
+            </div>
+          </div>
 
-        <textarea id="clientObs" placeholder="Observação do cliente"></textarea>
+          <div class="field-group">
+            <label for="clientOrigin" class="field-label">Origem</label>
+            <div class="field-input-wrap field-input-wrap--select">
+              <span class="field-icon"><i class="fa-solid fa-location-dot"></i></span>
+              <select id="clientOrigin" class="field-input field-select">
+                <option value="trafego_pago">Tráfego Pago</option>
+                <option value="loja_fisica">Loja Física</option>
+              </select>
+              <span class="field-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+          </div>
 
-        <h3>Primeiro item / serviço</h3>
+          <div class="field-group">
+            <label for="clientObs" class="field-label">Observação</label>
+            <textarea id="clientObs" class="field-textarea" placeholder="Observações sobre o cliente..."></textarea>
+          </div>
+        </div>
 
-        <input id="itemName" type="text" placeholder="Ex: Armação + lentes" required>
-        <input id="itemPrice" type="number" placeholder="Preço" min="0" step="0.01">
+        <div class="form-section">
+          <h3 class="form-section__title">
+            <i class="fa-solid fa-tag" aria-hidden="true"></i>
+            Primeiro item / serviço
+          </h3>
 
-        <select id="itemStatus">
-          <option value="so_passou">Só passou</option>
-          <option value="futuramente">Futuramente</option>
-          <option value="analisando_orcamento">Analisando orçamento</option>
-          <option value="aguardando_mensagem">Aguardando mensagem</option>
-          <option value="concluido">Concluído</option>
-        </select>
+          <div class="field-group">
+            <label for="itemName" class="field-label">Descrição</label>
+            <div class="field-input-wrap">
+              <span class="field-icon"><i class="fa-solid fa-glasses"></i></span>
+              <input id="itemName" type="text" class="field-input" placeholder="Ex: Armação + lentes" required>
+            </div>
+          </div>
 
-        <select id="itemTemperature">
-          <option value="frio">Frio</option>
-          <option value="morno">Morno</option>
-          <option value="quente">Quente</option>
-        </select>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="itemPrice" class="field-label">Preço</label>
+              <div class="field-input-wrap">
+                <span class="field-icon"><i class="fa-solid fa-brazilian-real-sign"></i></span>
+                <input id="itemPrice" type="number" class="field-input" placeholder="0,00" min="0" step="0.01">
+              </div>
+            </div>
 
-        <textarea id="itemObs" placeholder="Observação do item"></textarea>
+            <div class="field-group">
+              <label for="itemTemperature" class="field-label">Temperatura</label>
+              <div class="field-input-wrap field-input-wrap--select">
+                <span class="field-icon"><i class="fa-solid fa-fire"></i></span>
+                <select id="itemTemperature" class="field-input field-select">
+                  <option value="frio">❄️ Frio</option>
+                  <option value="morno">🌤 Morno</option>
+                  <option value="quente">🔥 Quente</option>
+                </select>
+                <span class="field-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+              </div>
+            </div>
+          </div>
 
-        <button type="submit">Salvar cliente</button>
+          <div class="field-group">
+            <label for="itemStatus" class="field-label">Status</label>
+            <div class="field-input-wrap field-input-wrap--select">
+              <span class="field-icon"><i class="fa-solid fa-flag"></i></span>
+              <select id="itemStatus" class="field-input field-select">
+                <option value="so_passou">Só passou</option>
+                <option value="futuramente">Futuramente</option>
+                <option value="analisando_orcamento">Analisando orçamento</option>
+                <option value="aguardando_mensagem">Aguardando mensagem</option>
+                <option value="concluido">Concluído</option>
+              </select>
+              <span class="field-chevron"><i class="fa-solid fa-chevron-down"></i></span>
+            </div>
+          </div>
 
-        <p id="clientFormMessage"></p>
+          <div class="field-group">
+            <label for="itemObs" class="field-label">Observação do item</label>
+            <textarea id="itemObs" class="field-textarea" placeholder="Detalhes adicionais..."></textarea>
+          </div>
+        </div>
 
+        <button type="submit" class="login-btn modal__submit">
+          <span class="login-btn__text">Salvar cliente</span>
+          <i class="fa-solid fa-arrow-right login-btn__icon"></i>
+        </button>
+
+        <p id="clientFormMessage" class="modal__message" role="alert" aria-live="polite"></p>
       </form>
-
     </div>
-  </section>
+  </div>
 
   <script type="module" src="./scripts/pages/dashboard.js"></script>
-
 </body>
-
 </html>

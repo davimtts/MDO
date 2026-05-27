@@ -51,7 +51,13 @@ export async function createClientWithItem(clientData, itemData) {
 }
 
 export async function getDashboardData() {
-  const clients = await getClients();
+  const session = getSession();
+
+  if (!session) {
+    throw new Error("Usuário não autenticado.");
+  }
+
+  const clients = await getClients(session.key);
   const items = await getItems();
 
   const clientsWithItems = clients.map(client => {

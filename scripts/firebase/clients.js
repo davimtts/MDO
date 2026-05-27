@@ -3,7 +3,8 @@ import {
   addDoc,
   getDocs,
   query,
-  orderBy
+  orderBy,
+  where
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import { db } from "./config.js";
@@ -19,8 +20,12 @@ export async function saveClient(client) {
   };
 }
 
-export async function getClients() {
-  const q = query(clientsRef, orderBy("client_data_create", "desc"));
+export async function getClients(userId) {
+  const q = query(
+    clientsRef,
+    where("user_id", "==", userId),
+    orderBy("client_data_create", "desc")
+  );
 
   const snapshot = await getDocs(q);
 
