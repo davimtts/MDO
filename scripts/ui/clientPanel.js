@@ -1,6 +1,11 @@
 import { updateClientWithItems } from "../services/clientService.js";
 import { showToast } from "./toast.js";
 
+import {
+  renderStatusOptions,
+  renderTemperatureOptions
+} from "./settingsSelects.js";
+
 let cache = {
   clientsWithItems: []
 };
@@ -143,7 +148,6 @@ function createInterestForm(item = {}) {
     </h4>
 
     <div class="field-group">
-      <label class="field-label">Nome do interesse</label>
 
       <div class="field-input-wrap">
         <span class="field-icon">
@@ -162,7 +166,6 @@ function createInterestForm(item = {}) {
     <div class="field-row">
 
       <div class="field-group">
-        <label class="field-label">Preço</label>
 
         <div class="field-input-wrap">
           <span class="field-icon">
@@ -181,34 +184,13 @@ function createInterestForm(item = {}) {
       </div>
 
       <div class="field-group">
-        <label class="field-label">Temperatura</label>
 
         <div class="field-input-wrap field-input-wrap--select">
           <span class="field-icon">
             <i class="fa-solid fa-fire"></i>
           </span>
 
-          <select class="field-input field-select interest-temperature">
-
-            <option value="frio"
-              ${item.item_temperatura === "frio" ? "selected" : ""}
-            >
-              ❄️ Frio
-            </option>
-
-            <option value="morno"
-              ${item.item_temperatura === "morno" ? "selected" : ""}
-            >
-              🌤 Morno
-            </option>
-
-            <option value="quente"
-              ${item.item_temperatura === "quente" ? "selected" : ""}
-            >
-              🔥 Quente
-            </option>
-
-          </select>
+          <select class="field-input field-select interest-temperature"></select>
 
           <span class="field-chevron">
             <i class="fa-solid fa-chevron-down"></i>
@@ -219,46 +201,13 @@ function createInterestForm(item = {}) {
     </div>
 
     <div class="field-group">
-      <label class="field-label">Status</label>
 
       <div class="field-input-wrap field-input-wrap--select">
         <span class="field-icon">
           <i class="fa-solid fa-flag"></i>
         </span>
 
-        <select class="field-input field-select interest-status">
-
-          <option value="so_passou"
-            ${item.item_status === "so_passou" ? "selected" : ""}
-          >
-            Só passou
-          </option>
-
-          <option value="futuramente"
-            ${item.item_status === "futuramente" ? "selected" : ""}
-          >
-            Futuramente
-          </option>
-
-          <option value="analisando_orcamento"
-            ${item.item_status === "analisando_orcamento" ? "selected" : ""}
-          >
-            Analisando orçamento
-          </option>
-
-          <option value="aguardando_mensagem"
-            ${item.item_status === "aguardando_mensagem" ? "selected" : ""}
-          >
-            Aguardando mensagem
-          </option>
-
-          <option value="concluido"
-            ${item.item_status === "concluido" ? "selected" : ""}
-          >
-            Concluído
-          </option>
-
-        </select>
+        <select class="field-input field-select interest-status"></select>
 
         <span class="field-chevron">
           <i class="fa-solid fa-chevron-down"></i>
@@ -267,7 +216,6 @@ function createInterestForm(item = {}) {
     </div>
 
     <div class="field-group">
-      <label class="field-label">Observação</label>
 
       <textarea
         class="field-textarea interest-obs"
@@ -275,6 +223,12 @@ function createInterestForm(item = {}) {
       >${item.item_obs || ""}</textarea>
     </div>
   `;
+
+  const statusSelect = card.querySelector(".interest-status");
+  const temperatureSelect = card.querySelector(".interest-temperature");
+
+  renderStatusOptions(statusSelect, item.item_status);
+  renderTemperatureOptions(temperatureSelect, item.item_temperatura);
 
   return card;
 }

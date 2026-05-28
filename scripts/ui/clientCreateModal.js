@@ -1,6 +1,11 @@
 import { createClientWithOptionalItem } from "../services/clientService.js";
 import { showToast } from "./toast.js";
 
+import {
+  renderStatusOptions,
+  renderTemperatureOptions
+} from "./settingsSelects.js";
+
 export function initClientCreateModal({ onSuccess } = {}) {
   const modal = document.getElementById("clientModal");
   const openButton = document.getElementById("openClientModal");
@@ -8,9 +13,15 @@ export function initClientCreateModal({ onSuccess } = {}) {
   const form = document.getElementById("clientForm");
   const message = document.getElementById("clientFormMessage");
 
+  const statusSelect = document.getElementById("itemStatus");
+  const temperatureSelect = document.getElementById("itemTemperature");
+
   if (!modal || !openButton || !closeButton || !form) {
     return;
   }
+
+  renderStatusOptions(statusSelect);
+  renderTemperatureOptions(temperatureSelect);
 
   openButton.addEventListener("click", () => {
     modal.classList.remove("hidden");

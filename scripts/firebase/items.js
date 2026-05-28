@@ -5,7 +5,8 @@ import {
   query,
   orderBy,
   doc,
-  updateDoc
+  updateDoc,
+  where
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import { db } from "./config.js";
@@ -21,15 +22,40 @@ export async function saveItem(item) {
   };
 }
 
-export async function getItems() {
-  const q = query(itemsRef, orderBy("item_data_create", "desc"));
+export async function getItems(clientIds = []) {
 
-  const snapshot = await getDocs(q);
+  if (!clientIds.length) {
+    return [];
+  }
 
-  return snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data()
-  }));
+  const chunks = [];
+
+  for (let i = 0; i < clientIds.length; i += 10) {
+    chunks.push(clientIds.slice(i, i + 10));
+  }
+
+  const results = await Promise.all(
+
+    chunks.map(async idsChunk => {
+
+      const q = query(
+        itemsRef,
+        where("client_id", "in", idsChunk),
+        orderBy("item_data_create", "desc")
+      );
+
+      const snapshot = await getDocs(q);
+
+      return snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+
+    })
+
+  );
+
+  return results.flat();
 }
 
 export async function updateItem(itemId, data) {

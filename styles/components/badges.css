@@ -10,27 +10,47 @@
   white-space: nowrap;
 }
 
-.badge-so_passou {
+.badge-passed {
   background: var(--badge-passed-bg);
   color: var(--badge-passed-text);
 }
 
-.badge-futuramente {
+.badge-future {
   background: var(--badge-future-bg);
   color: var(--badge-future-text);
 }
 
-.badge-analisando_orcamento {
+.badge-budget {
   background: var(--badge-budget-bg);
   color: var(--badge-budget-text);
 }
 
-.badge-aguardando_mensagem {
+.badge-waiting {
   background: var(--badge-waiting-bg);
   color: var(--badge-waiting-text);
 }
 
-.badge-concluido {
+.badge-done {
   background: var(--badge-done-bg);
   color: var(--badge-done-text);
+}
+
+.badge-cold {
+  background: var(--badge-cold-bg);
+  color: var(--badge-cold-text);
+}
+
+.badge-warm {
+  background: var(--badge-warm-bg);
+  color: var(--badge-warm-text);
+}
+
+.badge-hot {
+  background: var(--badge-hot-bg);
+  color: var(--badge-hot-text);
+}
+
+.badge-default {
+  background: var(--accent-light);
+  color: var(--accent);
 }

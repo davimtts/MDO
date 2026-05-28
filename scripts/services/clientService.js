@@ -11,7 +11,10 @@ export async function getDashboardData() {
   }
 
   const clients = await getClients(session.key);
-  const items = await getItems();
+
+  const clientIds = clients.map(client => client.id);
+
+  const items = await getItems(clientIds);
 
   const clientsWithItems = clients.map(client => {
     const clientItems = items.filter(item => item.client_id === client.id);

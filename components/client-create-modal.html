@@ -22,7 +22,6 @@
         </h3>
 
         <div class="field-group">
-          <label for="clientName" class="field-label">Nome</label>
 
           <div class="field-input-wrap">
             <span class="field-icon">
@@ -40,7 +39,6 @@
         </div>
 
         <div class="field-group">
-          <label for="clientPhone" class="field-label">Telefone</label>
 
           <div class="field-input-wrap">
             <span class="field-icon">
@@ -58,7 +56,6 @@
         </div>
 
         <div class="field-group">
-          <label for="clientOrigin" class="field-label">Origem</label>
 
           <div class="field-input-wrap field-input-wrap--select">
             <span class="field-icon">
@@ -66,8 +63,9 @@
             </span>
 
             <select id="clientOrigin" class="field-input field-select">
-              <option value="trafego_pago">Tráfego Pago</option>
               <option value="loja_fisica">Loja Física</option>
+              <option value="trafego_pago">Tráfego Pago</option>
+              <option value="indicacao">Indicação</option>
             </select>
 
             <span class="field-chevron">
@@ -77,7 +75,6 @@
         </div>
 
         <div class="field-group">
-          <label for="clientObs" class="field-label">Observação</label>
 
           <textarea
             id="clientObs"
@@ -94,7 +91,6 @@
         </h3>
 
         <div class="field-group">
-          <label for="itemName" class="field-label">Descrição</label>
 
           <div class="field-input-wrap">
             <span class="field-icon">
@@ -112,7 +108,6 @@
 
         <div class="field-row">
           <div class="field-group">
-            <label for="itemPrice" class="field-label">Preço</label>
 
             <div class="field-input-wrap">
               <span class="field-icon">
@@ -131,18 +126,13 @@
           </div>
 
           <div class="field-group">
-            <label for="itemTemperature" class="field-label">Temperatura</label>
 
             <div class="field-input-wrap field-input-wrap--select">
               <span class="field-icon">
                 <i class="fa-solid fa-fire"></i>
               </span>
 
-              <select id="itemTemperature" class="field-input field-select">
-                <option value="frio">❄️ Frio</option>
-                <option value="morno">🌤 Morno</option>
-                <option value="quente">🔥 Quente</option>
-              </select>
+              <select id="itemTemperature" class="field-input field-select"></select>
 
               <span class="field-chevron">
                 <i class="fa-solid fa-chevron-down"></i>
@@ -152,7 +142,6 @@
         </div>
 
         <div class="field-group">
-          <label for="itemStatus" class="field-label">Status</label>
 
           <div class="field-input-wrap field-input-wrap--select">
             <span class="field-icon">
@@ -160,11 +149,7 @@
             </span>
 
             <select id="itemStatus" class="field-input field-select">
-              <option value="so_passou">Só passou</option>
-              <option value="futuramente">Futuramente</option>
-              <option value="analisando_orcamento">Analisando orçamento</option>
-              <option value="aguardando_mensagem">Aguardando mensagem</option>
-              <option value="concluido">Concluído</option>
+              
             </select>
 
             <span class="field-chevron">
@@ -174,7 +159,6 @@
         </div>
 
         <div class="field-group">
-          <label for="itemObs" class="field-label">Observação do item</label>
 
           <textarea
             id="itemObs"
