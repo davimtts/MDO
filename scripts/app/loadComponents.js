@@ -1,12 +1,14 @@
-export async function loadComponent(selector, path) {
+import { path } from "../utils/constants.js";
+
+export async function loadComponent(selector, componentPath) {
   const root = document.querySelector(selector);
 
   if (!root) return;
 
-  const response = await fetch(path);
+  const response = await fetch(path(componentPath));
 
   if (!response.ok) {
-    throw new Error(`Erro ao carregar componente: ${path}`);
+    throw new Error(`Erro ao carregar componente: ${componentPath}`);
   }
 
   root.innerHTML = await response.text();
