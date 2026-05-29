@@ -37,34 +37,70 @@
   <div id="topbar-root"></div>
 
   <main class="main-content">
+
     <section class="clients-header">
-      <div>
-        <h1 class="clients-header__title">Clientes</h1>
-        <p class="clients-header__subtitle">Veja, busque e acompanhe seus clientes.</p>
-      </div>
+      <h1 class="clients-header__title">Clientes</h1>
+      <p class="clients-header__subtitle">Gerencie e acompanhe seus clientes.</p>
     </section>
 
-    <section class="clients-tools">
+    <section class="clients-search">
       <div class="field-input-wrap">
         <span class="field-icon">
           <i class="fa-solid fa-magnifying-glass"></i>
         </span>
+        <input
+          id="clientSearch"
+          class="field-input"
+          type="text"
+          placeholder="Buscar por nome ou telefone..."
+        >
+      </div>
 
-        <input id="clientSearch" class="field-input" type="text" placeholder="Buscar por nome ou telefone">
+      <button id="toggleFiltersButton" class="filter-button" type="button">
+        <i class="fa-solid fa-sliders"></i>
+        Filtros
+      </button>
+    </section>
+
+    <section class="filter-section" id="filtersArea">
+      <h2 class="filter-title">Filtrar por origem</h2>
+      <div id="originFilters" class="filter-grid">
+        <button class="filter-card active" type="button" data-origin="all">
+          <i class="fa-solid fa-border-all"></i>
+          <span>Todos</span>
+          <strong id="originAllCount">0</strong>
+        </button>
+        <button class="filter-card" type="button" data-origin="loja_fisica">
+          <i class="fa-solid fa-store"></i>
+          <span>Loja</span>
+          <strong id="originStoreCount">0</strong>
+        </button>
+        <button class="filter-card" type="button" data-origin="trafego_pago">
+          <i class="fa-solid fa-bullhorn"></i>
+          <span>Tráfego</span>
+          <strong id="originPaidCount">0</strong>
+        </button>
+        <button class="filter-card" type="button" data-origin="indicacao">
+          <i class="fa-solid fa-users"></i>
+          <span>Indicação</span>
+          <strong id="originReferralCount">0</strong>
+        </button>
       </div>
     </section>
 
-    <section class="panel">
-      <div class="panel__header">
-        <h2 class="panel__title">
-          <i class="fa-solid fa-users panel__title-icon"></i>
-          Todos os clientes
-        </h2>
-
-        <span id="clientsCount" class="panel__count">0</span>
+    <section class="filter-section">
+      <h2 class="filter-title">Filtrar por status</h2>
+      <div id="statusFilters" class="filter-grid">
+        <button class="filter-card active" type="button" data-status="all">
+          <span>Todos</span>
+          <strong id="statusAllCount">0</strong>
+        </button>
       </div>
+    </section>
 
-      <div id="clientsList" class="client-list"></div>
+    <section class="clients-table-panel">
+
+      <div id="clientsList" class="clients-table-list"></div>
 
       <div id="clientsEmpty" class="client-list--empty">
         <i class="fa-regular fa-user"></i>

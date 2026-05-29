@@ -8,42 +8,246 @@ body {
 .main-content {
   flex: 1;
   padding: 0 16px calc(var(--bottomnav-height) + 24px);
-  max-width: 700px;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto;
   animation: fadeUp 0.45s var(--ease-out) both;
 }
 
+/* ── Header ─────────────────────────────────────────── */
+
 .clients-header {
-  padding-top: 24px;
-  padding-bottom: 18px;
+  padding-top: 18px;
+  padding-bottom: 14px;
 }
 
 .clients-header__title {
-  font-size: clamp(1.6rem, 6vw, 2rem);
+  font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: -0.03em;
 }
 
 .clients-header__subtitle {
-  margin-top: 4px;
+  margin-top: 3px;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.78rem;
 }
 
-.clients-tools {
-  margin-bottom: 18px;
+/* ── Search ──────────────────────────────────────────── */
+
+.clients-search {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
+.filter-button {
+  padding: 0 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  color: var(--accent);
+  background: var(--bg-card);
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── Filter section ──────────────────────────────────── */
+
+.filter-section {
+  margin-bottom: 16px;
+}
+
+.filter-title {
+  margin-bottom: 8px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.filter-card {
+  min-height: 56px;
+  padding: 6px 6px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-align: center;
+  clip-path: polygon(
+    10px 0%, 100% 0%,
+    100% calc(100% - 10px), calc(100% - 10px) 100%,
+    0% 100%, 0% 10px
+  );
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.filter-card i {
+  font-size: 0.85rem;
+}
+
+.filter-card span {
+  font-size: 0.65rem;
+  line-height: 1.1;
+}
+
+.filter-card strong {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.filter-card.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.filter-card.active strong {
+  color: var(--accent);
+}
+
+/* ── Table panel ─────────────────────────────────────── */
+
+.clients-table-panel {
+  background: transparent;
+}
+
+.clients-table-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Client row card ─────────────────────────────────── */
+
+.client-table-row {
+  display: grid;
+  grid-template-columns: 36px 1fr auto 18px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 10px 10px 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  background: var(--bg-card);
+  cursor: pointer;
+  position: relative;
+  clip-path: polygon(
+    16px 0%, 100% 0%,
+    100% calc(100% - 16px), calc(100% - 16px) 100%,
+    0% 100%, 0% 16px
+  );
+  transition: background var(--transition);
+}
+
+.client-table-row:hover {
+  background: var(--bg-secondary);
+}
+
+/* Avatar */
+.client-table-row .avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+/* Coluna principal: nome + badge + origem */
+.client-main {
+  min-width: 0;
+}
+
+.client-main strong {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.client-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.client-origin {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+}
+
+/* Coluna direita: preço + data */
+.client-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.client-item {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+}
+
+.client-price {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.client-date {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+}
+
+/* Seta */
+.client-arrow {
+  color: var(--text-tertiary);
+  font-size: 0.78rem;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ──────────────────────────────────────── */
+
+@media (max-width: 520px) {
+  .main-content {
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .filter-grid {
+    grid-template-columns: repeat(4, minmax(70px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
+  .filter-card {
+    min-width: 70px;
   }
 }
 
@@ -65,5 +269,24 @@ body {
 
   .clients-header {
     padding-top: 0;
+  }
+
+  /* Desktop: mostra mais colunas */
+  .client-table-row {
+    max-width: 500px;
+    grid-template-columns: 40px 1fr auto auto 18px;
+    padding: 12px 14px;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
