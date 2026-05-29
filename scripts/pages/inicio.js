@@ -136,3 +136,6 @@ initClientPanel({
 });
 
 await renderDashboard();
+import { setActiveNav } from "../ui/activeNav.js";
+
+setActiveNav();

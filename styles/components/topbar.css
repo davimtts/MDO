@@ -1,0 +1,61 @@
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: var(--topbar-height);
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background var(--transition-slow), border-color var(--transition-slow);
+}
+.topbar__logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
+.topbar__btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  position: relative;
+  transition: background var(--transition), color var(--transition);
+}
+
+.topbar__btn:hover {
+  background: var(--bg-hover);
+  color: var(--accent);
+}
+
+.topbar__badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  line-height: 1;
+}
+@media (min-width: 900px) {
+    .topbar {
+    display: none;
+  }
+}

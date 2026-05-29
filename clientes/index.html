@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ÍRIS - Clientes</title>
+  <link rel="icon" href="/assets/icons/iris.ico" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="/styles/global.css">
+
+  <link rel="stylesheet" href="/styles/components/topbar.css">
+  <link rel="stylesheet" href="/styles/components/toast.css">
+  <link rel="stylesheet" href="/styles/components/modal.css">
+  <link rel="stylesheet" href="/styles/components/form.css">
+  <link rel="stylesheet" href="/styles/components/badges.css">
+  <link rel="stylesheet" href="/styles/components/client-list.css">
+  <link rel="stylesheet" href="/styles/components/client-panel.css">
+  <link rel="stylesheet" href="/styles/components/bottom-nav.css">
+  <link rel="stylesheet" href="/styles/components/sidebar.css">
+
+  <link rel="stylesheet" href="/styles/pages/clientes.css">
+</head>
+
+<body>
+
+  <div id="sidebar-root"></div>
+  <div id="topbar-root"></div>
+
+  <main class="main-content">
+    <section class="clients-header">
+      <div>
+        <h1 class="clients-header__title">Clientes</h1>
+        <p class="clients-header__subtitle">Veja, busque e acompanhe seus clientes.</p>
+      </div>
+    </section>
+
+    <section class="clients-tools">
+      <div class="field-input-wrap">
+        <span class="field-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+
+        <input
+          id="clientSearch"
+          class="field-input"
+          type="text"
+          placeholder="Buscar por nome ou telefone"
+        >
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel__header">
+        <h2 class="panel__title">
+          <i class="fa-solid fa-users panel__title-icon"></i>
+          Todos os clientes
+        </h2>
+
+        <span id="clientsCount" class="panel__count">0</span>
+      </div>
+
+      <div id="clientsList" class="client-list"></div>
+
+      <div id="clientsEmpty" class="client-list--empty">
+        <i class="fa-regular fa-user"></i>
+        <span>Nenhum cliente encontrado</span>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="bottom-nav-root"></div>
+  <div id="client-create-modal-root"></div>
+  <div id="client-panel-root"></div>
+  <div id="toast-root"></div>
+
+  <script type="module" src="/scripts/pages/clientes.js"></script>
+</body>
+</html>
