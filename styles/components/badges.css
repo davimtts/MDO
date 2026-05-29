@@ -1,4 +1,4 @@
-.badge {
+.status-badge {
   display: inline-block;
   margin-top: 5px;
   padding: 3px 8px;
@@ -10,30 +10,81 @@
   white-space: nowrap;
 }
 
-.badge-passed {
-  background: var(--badge-passed-bg);
-  color: var(--badge-passed-text);
+.badge-red {
+  background-color: var(--status-red-bg);
+  color: var(--status-red-text);
 }
 
-.badge-future {
-  background: var(--badge-future-bg);
-  color: var(--badge-future-text);
+.badge-gray {
+  background-color: var(--status-gray-bg);
+  color: var(--status-gray-text);
 }
 
-.badge-budget {
-  background: var(--badge-budget-bg);
-  color: var(--badge-budget-text);
+.badge-orange {
+  background-color: var(--status-orange-bg);
+  color: var(--status-orange-text);
 }
 
-.badge-waiting {
-  background: var(--badge-waiting-bg);
-  color: var(--badge-waiting-text);
+.badge-purple {
+  background-color: var(--status-purple-bg);
+  color: var(--status-purple-text);
 }
 
-.badge-done {
-  background: var(--badge-done-bg);
-  color: var(--badge-done-text);
+.badge-blue {
+  background-color: var(--status-blue-bg);
+  color: var(--status-blue-text);
 }
+
+.badge-yellow {
+  background-color: var(--status-yellow-bg);
+  color: var(--status-yellow-text);
+}
+
+.badge-green {
+  background-color: var(--status-green-bg);
+  color: var(--status-green-text);
+}
+
+
+
+
+.select-red {
+  background-color: var(--status-red-bg);
+  color: var(--status-red-text);
+}
+
+.select-gray {
+  background-color: var(--status-gray-bg);
+  color: var(--status-gray-text);
+}
+
+.select-orange {
+  background-color: var(--status-orange-bg);
+  color: var(--status-orange-text);
+}
+
+.select-purple {
+  background-color: var(--status-purple-bg);
+  color: var(--status-purple-text);
+}
+
+.select-blue {
+  background-color: var(--status-blue-bg);
+  color: var(--status-blue-text);
+}
+
+.select-yellow {
+  background-color: var(--status-yellow-bg);
+  color: var(--status-yellow-text);
+}
+
+.select-green {
+  background-color: var(--status-green-bg);
+  color: var(--status-green-text);
+}
+
+
+
 
 .badge-cold {
   background: var(--badge-cold-bg);
@@ -46,6 +97,23 @@
 }
 
 .badge-hot {
+  background: var(--badge-hot-bg);
+  color: var(--badge-hot-text);
+}
+
+
+
+.select-cold {
+  background: var(--badge-cold-bg);
+  color: var(--badge-cold-text);
+}
+
+.select-warm {
+  background: var(--badge-warm-bg);
+  color: var(--badge-warm-text);
+}
+
+.select-hot {
   background: var(--badge-hot-bg);
   color: var(--badge-hot-text);
 }

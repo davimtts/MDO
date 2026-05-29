@@ -15,7 +15,7 @@ form.addEventListener("submit", async (event) => {
 
   try {
     await loginWithKey(key);
-    window.location.href = ROUTES.dashboard;
+    window.location.href = ROUTES.inicio;
   } catch (error) {
     errorBox.textContent = error.message;
   }

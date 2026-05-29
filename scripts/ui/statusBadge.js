@@ -16,7 +16,7 @@ export function renderStatusBadge(statusId) {
   if (!statusId) return "";
 
   return `
-    <small class="badge badge-${getStatusColor(statusId)}">
+    <small class="status-badge badge-${getStatusColor(statusId)}">
       ${getStatusLabel(statusId)}
     </small>
   `;

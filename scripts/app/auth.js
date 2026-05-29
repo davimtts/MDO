@@ -8,7 +8,7 @@ export async function checkAuth() {
   if (key) {
     try {
       await loginWithKey(key);
-      window.location.href = ROUTES.dashboard;
+      window.location.href = ROUTES.inicio;
       return;
     } catch (error) {
       console.error(error);
@@ -28,6 +28,6 @@ export function redirectIfLogged() {
   const session = getSession();
 
   if (session) {
-    window.location.href = ROUTES.dashboard;
+    window.location.href = ROUTES.inicio;
   }
 }

@@ -47,20 +47,51 @@
 
   --badge-passed-bg:   rgba(240, 70, 79, 0.10);
   --badge-passed-text: var(--accent);
-  --badge-future-bg:   rgba(237, 173, 74, 0.12);
-  --badge-future-text: #B87E14;
-  --badge-budget-bg:   rgba(248, 141, 77, 0.12);
-  --badge-budget-text: #C4631A;
-  --badge-waiting-bg:  rgba(139, 92, 246, 0.12);
-  --badge-waiting-text:#7C5CDB;
-  --badge-done-bg:     rgba(52, 199, 123, 0.12);
-  --badge-done-text:   #1E9E62;
+
 
   /* Sidebar */
   --sidebar-width:     240px;
   --topbar-height:     64px;
   --bottomnav-height:  72px;
 }
+
+/* Definição das paletas de cores dos Status */
+:root {
+  /* Red - Perdido (Erro/Cancelado) */
+  --status-red-bg:   rgba(240, 70, 79, 0.10);
+  --status-red-text: #F0464F;
+
+  /* Gray - Apenas Olhando (Neutro/Frio) */
+  --status-gray-bg:   rgba(142, 142, 147, 0.15);
+  --status-gray-text: #6E6E73;
+
+  /* Orange - Futuro (Alerta/Aguardando) */
+  --status-orange-bg:   rgba(255, 159, 10, 0.12);
+  --status-orange-text: #D97300;
+
+  /* Purple - Em Análise (Ação do cliente) */
+  --status-purple-bg:   rgba(191, 90, 242, 0.12);
+  --status-purple-text: #A946E8;
+
+  /* Blue - Aguardando Orçamento (Ação do vendedor) */
+  --status-blue-bg:   rgba(0, 122, 255, 0.10);
+  --status-blue-text: #007AFF;
+
+  /* Yellow - Negociando (Atenção Máxima/Quente) */
+  --status-yellow-bg:   rgba(255, 204, 0, 0.15);
+  --status-yellow-text: #B87E14;
+
+  /* Green - Vendido (Sucesso) */
+  --status-green-bg:   rgba(52, 199, 89, 0.12);
+  --status-green-text: #248A3D;
+}
+
+/* Classe Base do Badge (Igual para todos) */
+
+
+/* Classes Dinâmicas (Onde a mágica acontece via Banco de Dados) */
+
+
 
 /* =============================================
    TEMA CLARO (padrão)
@@ -103,7 +134,7 @@
     --bg-secondary:    #141210;
     --bg-card:         #1A1816;
     --bg-input:        #222019;
-    --bg-input-focus:  #29261F;
+    --bg-input-focus:  #272727;
     --bg-hover:        #1F1D1B;
 
     --text-primary:    #F2F0EC;

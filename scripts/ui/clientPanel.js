@@ -1,14 +1,50 @@
 import { updateClientWithItems } from "../services/clientService.js";
 import { showToast } from "./toast.js";
 
+import { formatShortDate } from "../utils/formatters.js";
+
 import {
   renderStatusOptions,
   renderTemperatureOptions
 } from "./settingsSelects.js";
 
+import {
+  getStatusMap,
+  getTemperatureMap
+} from "../services/settingsService.js";
+
 let cache = {
   clientsWithItems: []
 };
+
+function applyStatusColor(select) {
+  const statusMap = getStatusMap();
+
+  const color =
+    statusMap[select.value]?.color;
+
+  updateSelectColor(select, color);
+}
+
+function applyTemperatureColor(select) {
+  const temperatureMap = getTemperatureMap();
+
+  const color =
+    temperatureMap[select.value]?.color;
+
+  updateSelectColor(select, color);
+}
+
+function updateSelectColor(select, color) {
+
+  [...select.classList]
+    .filter(c => c.startsWith("select-"))
+    .forEach(c => select.classList.remove(c));
+
+  if (color) {
+    select.classList.add(`select-${color}`);
+  }
+}
 
 export function setClientPanelData(data) {
   cache.clientsWithItems = data.clientsWithItems || [];
@@ -81,7 +117,7 @@ export function initClientPanel({ onSuccess } = {}) {
 
       closePanel();
 
-      showToast("Cliente alterado com sucesso.");
+      showToast("Cliente atualizado.");
 
       if (typeof onSuccess === "function") {
         await onSuccess();
@@ -144,34 +180,27 @@ function createInterestForm(item = {}) {
     <input type="hidden" class="interest-id" value="${item.id || ""}">
 
     <h4 class="interest-card__title">
-      ${item.id ? "Interesse cadastrado" : "Novo interesse"}
+      ${item.id ? formatShortDate(item.item_data_create) : "Novo interesse"}
     </h4>
-
-    <div class="field-group">
-
-      <div class="field-input-wrap">
-        <span class="field-icon">
-          <i class="fa-solid fa-glasses"></i>
-        </span>
-
-        <input
-          class="field-input interest-name"
-          type="text"
-          value="${item.item_nome || ""}"
-          placeholder="Ex: Óculos de grau"
-        >
-      </div>
-    </div>
-
     <div class="field-row">
-
       <div class="field-group">
-
+        <div class="field-input-wrap">
+          <span class="field-icon">
+            <i class="fa-solid fa-glasses"></i>
+          </span>
+          <input
+            class="field-input interest-name"
+            type="text"
+            value="${item.item_nome || ""}"
+            placeholder="Ex: Óculos de grau"
+          >
+        </div>
+      </div>
+      <div class="field-group">
         <div class="field-input-wrap">
           <span class="field-icon">
             <i class="fa-solid fa-brazilian-real-sign"></i>
           </span>
-
           <input
             class="field-input interest-price"
             type="number"
@@ -182,41 +211,35 @@ function createInterestForm(item = {}) {
           >
         </div>
       </div>
+    </div>
 
+
+    <div class="field-row">
       <div class="field-group">
-
         <div class="field-input-wrap field-input-wrap--select">
           <span class="field-icon">
-            <i class="fa-solid fa-fire"></i>
+            <i class="fa-solid fa-flag"></i>
           </span>
-
-          <select class="field-input field-select interest-temperature"></select>
-
+          <select class="field-input field-select interest-status"></select>
           <span class="field-chevron">
             <i class="fa-solid fa-chevron-down"></i>
           </span>
         </div>
       </div>
-
-    </div>
-
-    <div class="field-group">
-
-      <div class="field-input-wrap field-input-wrap--select">
-        <span class="field-icon">
-          <i class="fa-solid fa-flag"></i>
-        </span>
-
-        <select class="field-input field-select interest-status"></select>
-
-        <span class="field-chevron">
-          <i class="fa-solid fa-chevron-down"></i>
-        </span>
+      <div class="field-group">
+        <div class="field-input-wrap field-input-wrap--select">
+          <span class="field-icon">
+            <i class="fa-solid fa-fire"></i>
+          </span>
+          <select class="field-input field-select interest-temperature"></select>
+          <span class="field-chevron">
+            <i class="fa-solid fa-chevron-down"></i>
+          </span>
+        </div>
       </div>
     </div>
-
+    
     <div class="field-group">
-
       <textarea
         class="field-textarea interest-obs"
         placeholder="Detalhes adicionais..."
@@ -229,6 +252,17 @@ function createInterestForm(item = {}) {
 
   renderStatusOptions(statusSelect, item.item_status);
   renderTemperatureOptions(temperatureSelect, item.item_temperatura);
+
+  applyStatusColor(statusSelect);
+  applyTemperatureColor(temperatureSelect);
+
+  statusSelect.addEventListener("change", () => {
+    applyStatusColor(statusSelect);
+  });
+
+  temperatureSelect.addEventListener("change", () => {
+    applyTemperatureColor(temperatureSelect);
+  });
 
   return card;
 }

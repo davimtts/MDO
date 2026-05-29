@@ -18,6 +18,8 @@ import {
   setClientPanelData
 } from "../ui/clientPanel.js";
 
+import { isCurrentMonth } from "../utils/dates.js";
+
 await checkAuth();
 await loadSettings();
 
@@ -64,31 +66,33 @@ async function renderDashboard() {
   recentClientsList.innerHTML = "";
   pendingList.innerHTML = "";
 
-  newClientsCount.textContent = clients.length;
+  const currentMonthClients = clients.filter(client =>
+    isCurrentMonth(client.client_data_create)
+  );
+
+  newClientsCount.textContent = currentMonthClients.length;
 
   opportunitiesCount.textContent = items.filter(item =>
-    item.item_status !== "concluido"
+    item.item_status !== "perdido" && item.item_status !== "vendido"
   ).length;
 
   budgetCount.textContent = items.filter(item =>
-    item.item_status === "analisando_orcamento"
+    item.item_status === "analise"
   ).length;
 
   salesCount.textContent = items.filter(item =>
-    item.item_status === "concluido"
+    item.item_status === "vendido"
   ).length;
 
   const pendingItems = items.filter(item =>
-    item.item_status === "aguardando_mensagem"
+    item.item_status === "aguardando"
   );
 
   pendingCount.textContent = pendingItems.length;
 
   const recent = clientsWithItems.slice(0, 5);
 
-  if (recent.length === 0) {
-    recentClientsList.innerHTML = "<p>Nenhum cliente cadastrado ainda.</p>";
-  }
+
 
   recent.forEach(client => {
     const mainItem = getHighestPriorityItem(client.items);
@@ -100,9 +104,7 @@ async function renderDashboard() {
     );
   });
 
-  if (pendingItems.length === 0) {
-    pendingList.innerHTML = "<p>Nenhum contato pendente.</p>";
-  }
+
 
   pendingItems.slice(0, 4).forEach(item => {
     const client = clients.find(client => client.id === item.client_id);
