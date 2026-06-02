@@ -156,6 +156,7 @@ body {
   color: var(--accent);
 }
 
+
 .dashboard-grid {
   display: flex;
   flex-direction: column;

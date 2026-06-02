@@ -40,7 +40,7 @@ const salesCount = document.getElementById("salesCount");
 const pendingCount = document.getElementById("pendingCount");
 
 if (userName && session?.name) {
-  userName.textContent = session.name;
+  userName.textContent =  session.name.split(" ")[0];
 }
 
 function handleLogout() {

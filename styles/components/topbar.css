@@ -14,7 +14,7 @@
   transition: background var(--transition-slow), border-color var(--transition-slow);
 }
 .topbar__logo {
-  height: 32px;
+  height: 80%;
   width: auto;
   object-fit: contain;
 }
