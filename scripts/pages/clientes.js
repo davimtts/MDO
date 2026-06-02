@@ -197,6 +197,10 @@ function renderStatusFilters() {
         clientMatchesStatus(client, status.id)
       ).length;
 
+      if (count === 0) {
+        return;
+      }
+
       const button = document.createElement("button");
 
       button.className = `filter-card ${activeStatus === status.id ? "active" : ""}`;
@@ -204,9 +208,9 @@ function renderStatusFilters() {
       button.dataset.status = status.id;
 
       button.innerHTML = `
-        <span>${status.label}</span>
-        <strong>${count}</strong>
-      `;
+      <span>${status.label}</span>
+      <strong>${count}</strong>
+    `;
 
       statusFilters.appendChild(button);
     });
