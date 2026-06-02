@@ -1,0 +1,21 @@
+{
+  "name": "Mercadão dos Óculos CRM",
+  "short_name": "Mercadão CRM",
+  "start_url": "/iris/inicio/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F4F1",
+  "theme_color": "#F0464F",
+  "icons": [
+    {
+      "src": "/iris/assets/icons/mdo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/iris/assets/icons/mdo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

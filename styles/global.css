@@ -132,23 +132,3 @@ button {
 
 
 
-@media screen and (orientation: landscape) and (max-width: 900px) {
-  body::before {
-    content: "Vire o celular para a vertical";
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    display: grid;
-    place-items: center;
-    text-align: center;
-    padding: 24px;
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-  }
-
-  body>* {
-    display: none !important;
-  }
-}
