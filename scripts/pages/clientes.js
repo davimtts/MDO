@@ -92,6 +92,16 @@ function getDisplayItem(client) {
   return getHighestPriorityItem(filteredItems);
 }
 
+function getDisplayItems(client) {
+  if (activeStatus === "all") {
+    return client.items || [];
+  }
+
+  return (client.items || []).filter(item =>
+    item.item_status === activeStatus
+  );
+}
+
 function filterClients() {
   return pageData.clientsWithItems.filter(client => {
     return (
@@ -217,39 +227,94 @@ function renderStatusFilters() {
 }
 
 function renderClientTableRow(client) {
-  const mainItem = getDisplayItem(client);
+  const displayItems = getDisplayItems(client);
 
   const row = document.createElement("article");
   row.className = "client-table-row";
 
-  const price = mainItem?.item_preco
-    ? formatMoney(mainItem.item_preco)
-    : "";
-
-  const date = formatShortDate(
-    mainItem?.item_data_ult_ctt || client.client_ult_ctt || client.client_data_create
+  const clientDate = formatShortDate(
+    client.client_ult_ctt || client.client_data_create
   );
 
-  row.innerHTML = `
-    <div class="avatar">${getInitials(client.client_nome)}</div>
+  const interestsHtml = displayItems.length > 0
+    ? displayItems.map(item => {
+      const price = item.item_preco
+        ? formatMoney(item.item_preco)
+        : "";
 
-    <div class="client-main">
-      <strong>${client.client_nome}</strong>
-      <div class="client-meta">
-        <span class="client-origin">${formatOrigin(client.client_origem)}</span>
-        <span class="client-date">${date}</span>
+      const date = formatShortDate(
+        item.item_data_ult_ctt || item.item_data_create
+      );
+
+      return `
+        <div class="client-interest-row">
+
+          <div class="client-interest-top">
+
+            <div class="client-interest-main">
+              ${renderStatusBadge(item.item_status)}
+
+              <span class="client-interest-name">
+                ${item.item_nome || "Interesse sem nome"}
+              </span>
+            </div>
+
+            <div class="client-interest-meta">
+              ${price ? `<span class="client-interest-price">${price}</span>` : ""}
+              <span class="client-interest-date">${date}</span>
+            </div>
+
+          </div>
+
+          ${item.item_obs
+                ? `
+                <div class="client-interest-obs">
+                  ${item.item_obs}
+                </div>
+              `
+                : ""
+              }
+
+        </div>
+      `;
+    }).join("")
+    : `
+      <div class="client-interest-empty">
+        Nenhum interesse cadastrado
+      </div>
+    `;
+
+  row.innerHTML = `
+    <div class="client-card-top">
+      <div class="avatar">${getInitials(client.client_nome)}</div>
+
+      <div class="client-main">
+        <strong>${client.client_nome}</strong>
+
+        <div class="client-meta">
+          <span class="client-phone">
+            <i class="fa-solid fa-phone"></i>
+            ${client.client_telefone || "Sem telefone"}
+          </span>
+
+          <span class="client-origin">${formatOrigin(client.client_origem)}</span>
+
+          <span class="client-date">${clientDate}</span>
+        </div>
+
+        ${client.client_obs
+      ? `<p class="client-obs">${client.client_obs}</p>`
+      : ""
+    }
+      </div>
+
+      <div class="client-arrow">
+        <i class="fa-solid fa-chevron-right"></i>
       </div>
     </div>
 
-    <div class="client-right">
-      ${mainItem ? renderStatusBadge(mainItem.item_status) : ""}
-      <span class="client-item">${mainItem ? mainItem.item_nome : ""} </span>
-      <span class="client-price">${price}</span>
-      
-    </div>
-
-    <div class="client-arrow">
-      <i class="fa-solid fa-chevron-right"></i>
+    <div class="client-interests">
+      ${interestsHtml}
     </div>
   `;
 
