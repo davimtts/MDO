@@ -39,6 +39,9 @@ const budgetCount = document.getElementById("budgetCount");
 const salesCount = document.getElementById("salesCount");
 const pendingCount = document.getElementById("pendingCount");
 
+const monthlySalesCount = document.getElementById("monthlySalesCount");
+const salesChartBars = document.getElementById("salesChartBars");
+
 if (userName && session?.name) {
   userName.textContent =  session.name.split(" ")[0];
 }
@@ -56,8 +59,89 @@ if (logoutButtonDesktop) {
   logoutButtonDesktop.addEventListener("click", handleLogout);
 }
 
+
+
+
+function getCompletedItems(items) {
+  return items.filter(item =>
+    item.item_status === "vendido"
+  );
+}
+
+function getItemDate(item) {
+  return item.item_data_ult_ctt || item.item_data_create;
+}
+
+function getMonthlySales(items) {
+  return getCompletedItems(items).filter(item =>
+    isCurrentMonth(getItemDate(item))
+  );
+}
+
+function getSalesByMonth(items) {
+  const months = Array(12).fill(0);
+
+  getCompletedItems(items).forEach(item => {
+    const date = new Date(getItemDate(item));
+
+    if (Number.isNaN(date.getTime())) {
+      return;
+    }
+
+    const month = date.getMonth();
+
+    months[month]++;
+  });
+
+  return months;
+}
+
+
+
+
+
+
+function renderSalesChart(items) {
+  if (!monthlySalesCount || !salesChartBars) return;
+
+  const monthlySales = getMonthlySales(items);
+  const salesByMonth = getSalesByMonth(items);
+
+  monthlySalesCount.textContent = monthlySales.length;
+
+  const maxSales = Math.max(...salesByMonth, 1);
+  const currentMonth = new Date().getMonth();
+
+  const bars = salesChartBars.querySelectorAll(".chart-bar");
+
+  bars.forEach(bar => {
+    const month = Number(bar.dataset.month);
+    const salesCount = salesByMonth[month];
+
+    const height = salesCount === 0
+      ? 3
+      : Math.max((salesCount / maxSales) * 100, 8);
+
+    bar.style.setProperty("--h", `${height}%`);
+
+    bar.classList.toggle(
+      "chart-bar--active",
+      month === currentMonth
+    );
+
+    bar.title = `${salesCount} venda(s)`;
+  });
+}
+
+
+
+
+
+
+
 async function renderDashboard() {
   const { clients, items, clientsWithItems } = await getDashboardData();
+  renderSalesChart(items);
 
   setClientPanelData({
     clientsWithItems

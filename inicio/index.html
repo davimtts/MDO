@@ -137,24 +137,25 @@
         <div class="panel__header">
           <h2 class="panel__title">
             <i class="fa-solid fa-chart-line panel__title-icon" aria-hidden="true"></i>
-            Vendas neste ano
+            Vendas neste mês
           </h2>
-          <strong class="chart-panel__total" id="totalSales">R$ 0,00</strong>
+
+          <strong class="chart-panel__total" id="monthlySalesCount">0</strong>
         </div>
         <div class="chart-wrap" aria-hidden="true">
-          <div class="chart-bars">
-            <div class="chart-bar" style="--h:38%"><span>Jan</span></div>
-            <div class="chart-bar" style="--h:55%"><span>Fev</span></div>
-            <div class="chart-bar" style="--h:42%"><span>Mar</span></div>
-            <div class="chart-bar" style="--h:70%"><span>Abr</span></div>
-            <div class="chart-bar" style="--h:60%"><span>Mai</span></div>
-            <div class="chart-bar chart-bar--active" style="--h:84%"><span>Jun</span></div>
-            <div class="chart-bar" style="--h:0%"><span>Jul</span></div>
-            <div class="chart-bar" style="--h:0%"><span>Ago</span></div>
-            <div class="chart-bar" style="--h:0%"><span>Set</span></div>
-            <div class="chart-bar" style="--h:0%"><span>Out</span></div>
-            <div class="chart-bar" style="--h:0%"><span>Nov</span></div>
-            <div class="chart-bar" style="--h:0%"><span>Dez</span></div>
+          <div class="chart-bars" id="salesChartBars">
+            <div class="chart-bar" data-month="0"><span>Jan</span></div>
+            <div class="chart-bar" data-month="1"><span>Fev</span></div>
+            <div class="chart-bar" data-month="2"><span>Mar</span></div>
+            <div class="chart-bar" data-month="3"><span>Abr</span></div>
+            <div class="chart-bar" data-month="4"><span>Mai</span></div>
+            <div class="chart-bar" data-month="5"><span>Jun</span></div>
+            <div class="chart-bar" data-month="6"><span>Jul</span></div>
+            <div class="chart-bar" data-month="7"><span>Ago</span></div>
+            <div class="chart-bar" data-month="8"><span>Set</span></div>
+            <div class="chart-bar" data-month="9"><span>Out</span></div>
+            <div class="chart-bar" data-month="10"><span>Nov</span></div>
+            <div class="chart-bar" data-month="11"><span>Dez</span></div>
           </div>
         </div>
       </section>
