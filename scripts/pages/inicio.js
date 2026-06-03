@@ -23,6 +23,12 @@ import { isCurrentMonth } from "../utils/dates.js";
 await checkAuth();
 await loadSettings();
 
+import { applyNavLinks } from "../ui/navLinks.js";
+import { setActiveNav } from "../ui/activeNav.js";
+
+applyNavLinks();
+setActiveNav();
+
 const session = getSession();
 
 const userName = document.getElementById("userName");
@@ -220,10 +226,3 @@ initClientPanel({
 });
 
 await renderDashboard();
-import { applyNavLinks } from "../ui/navLinks.js";
-import { setActiveNav } from "../ui/activeNav.js";
-
-await loadSharedLayout();
-
-applyNavLinks();
-setActiveNav();
