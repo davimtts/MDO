@@ -1,4 +1,4 @@
-export const SESSION_KEY = 'iris_user_session';
+export const SESSION_KEY = "iris_user_session";
 
 const isGithubPages = window.location.hostname.includes("github.io");
 
@@ -7,7 +7,9 @@ export const BASE_PATH = isGithubPages ? "/iris" : "";
 export const ROUTES = {
   login: `${BASE_PATH}/login/`,
   inicio: `${BASE_PATH}/inicio/`,
-  clientes: `${BASE_PATH}/clientes/`
+  clientes: `${BASE_PATH}/clientes/`,
+  oportunidades: `${BASE_PATH}/oportunidades/`,
+  mais: `${BASE_PATH}/mais/`
 };
 
 export function path(pathname) {

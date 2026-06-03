@@ -19,7 +19,7 @@ import {
 } from "../utils/formatters.js";
 
 import { renderStatusBadge } from "../ui/statusBadge.js";
-import { setActiveNav } from "../ui/activeNav.js";
+
 
 import { initClientCreateModal } from "../ui/clientCreateModal.js";
 import {
@@ -31,6 +31,12 @@ import {
 await checkAuth();
 await loadSettings();
 
+import { applyNavLinks } from "../ui/navLinks.js";
+import { setActiveNav } from "../ui/activeNav.js";
+
+await loadSharedLayout();
+
+applyNavLinks();
 setActiveNav();
 
 const session = getSession();
@@ -267,13 +273,13 @@ function renderClientTableRow(client) {
           </div>
 
           ${item.item_obs
-                ? `
+          ? `
                 <div class="client-interest-obs">
                   ${item.item_obs}
                 </div>
               `
-                : ""
-              }
+          : ""
+        }
 
         </div>
       `;

@@ -220,6 +220,10 @@ initClientPanel({
 });
 
 await renderDashboard();
+import { applyNavLinks } from "../ui/navLinks.js";
 import { setActiveNav } from "../ui/activeNav.js";
 
+await loadSharedLayout();
+
+applyNavLinks();
 setActiveNav();
