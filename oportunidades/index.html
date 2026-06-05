@@ -38,13 +38,13 @@
   <div id="topbar-root"></div>
 
   <main class="main-content">
-
     <section class="opportunities-header">
       <h1 class="opportunities-header__title">Oportunidades</h1>
       <p class="opportunities-header__subtitle">Acompanhe os interesses por etapa de venda.</p>
     </section>
 
     <!-- Resumo do funil -->
+      
     <section class="funnel-summary" id="funnelSummary"></section>
 
     <!-- Busca -->
@@ -61,17 +61,22 @@
         >
       </div>
     </section>
-
     <section id="kanbanBoard" class="kanban-board"></section>
-
   </main>
 
   <div id="bottom-nav-root"></div>
   <div id="client-create-modal-root"></div>
   <div id="client-panel-root"></div>
   <div id="toast-root"></div>
+  
 
   <script type="module" src="../scripts/pages/oportunidades.js"></script>
+
+  <script src="../scripts/ui/disable_page.js"></script>
+  <script>
+    disablePage(".main-content", "A página de Oportunidades está em desenvolvimento. De seu Feedback!");
+  </script>
+  
 </body>
 
 </html>
