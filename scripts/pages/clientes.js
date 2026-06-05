@@ -237,7 +237,7 @@ function renderClientTableRow(client) {
   row.className = "client-table-row";
 
   const clientDate = formatShortDate(
-    client.client_ult_ctt || client.client_data_create
+    client.client_data_create
   );
 
   const interestsHtml = displayItems.length > 0
@@ -247,7 +247,7 @@ function renderClientTableRow(client) {
         : "";
 
       const date = formatShortDate(
-        item.item_data_ult_ctt || item.item_data_create
+        item.item_data_create
       );
 
       return `

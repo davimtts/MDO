@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Mercadão dos Óculos - Oportunidades</title>
+  <link rel="icon" href="../assets/icons/mdo.ico" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/components/topbar.css">
+  <link rel="stylesheet" href="../styles/components/toast.css">
+  <link rel="stylesheet" href="../styles/components/modal.css">
+  <link rel="stylesheet" href="../styles/components/form.css">
+  <link rel="stylesheet" href="../styles/components/badges.css">
+  <link rel="stylesheet" href="../styles/components/client-panel.css">
+  <link rel="stylesheet" href="../styles/components/bottom-nav.css">
+  <link rel="stylesheet" href="../styles/components/sidebar.css">
+
+  <link rel="stylesheet" href="../styles/pages/oportunidades.css">
+</head>
+
+<body>
+
+  <div id="sidebar-root"></div>
+  <div id="topbar-root"></div>
+
+  <main class="main-content">
+
+    <section class="opportunities-header">
+      <h1 class="opportunities-header__title">Oportunidades</h1>
+      <p class="opportunities-header__subtitle">Acompanhe os interesses por etapa de venda.</p>
+    </section>
+
+    <!-- Resumo do funil -->
+    <section class="funnel-summary" id="funnelSummary"></section>
+
+    <!-- Busca -->
+    <section class="opportunities-search">
+      <div class="field-input-wrap">
+        <span class="field-icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+        <input
+          id="opportunitySearch"
+          class="field-input"
+          type="text"
+          placeholder="Buscar cliente ou interesse..."
+        >
+      </div>
+    </section>
+
+    <section id="kanbanBoard" class="kanban-board"></section>
+
+  </main>
+
+  <div id="bottom-nav-root"></div>
+  <div id="client-create-modal-root"></div>
+  <div id="client-panel-root"></div>
+  <div id="toast-root"></div>
+
+  <script type="module" src="../scripts/pages/oportunidades.js"></script>
+</body>
+
+</html>

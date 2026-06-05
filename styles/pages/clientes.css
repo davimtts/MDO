@@ -130,7 +130,7 @@ body {
 .clients-table-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 15px;
 }
 
 /* ── Client row card ─────────────────────────────────── */
@@ -323,7 +323,7 @@ body {
   }
 
   .filter-grid {
-    grid-template-columns: repeat(4, minmax(70px, 1fr));
+    grid-template-columns: repeat(5, minmax(70px, 1fr));
     overflow-x: auto;
     padding-bottom: 2px;
   }
