@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>MDO - CRM de Vendas</title>
+  <link rel="icon" href="./assets/icons/mdo.ico" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/pages/home.css">
+</head>
+
+<body>
+
+  <header class="home-header">
+    <a href="./" class="home-logo">
+      
+        <img class="home-logo__icon" src="../assets/logo/mdo.png" alt="Logo do MDO">
+      
+      <span>CRM</span>
+    </a>
+
+    <nav class="home-nav">
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#recursos">Recursos</a>
+      <a href="../login/" class="home-nav__login">Entrar</a>
+    </nav>
+  </header>
+
+  <main class="home-page">
+
+    <section class="hero">
+      <div class="hero__content">
+        <span class="hero__eyebrow">CRM interno para ótica</span>
+
+        <h1>Organize clientes, orçamentos e oportunidades em um só lugar.</h1>
+
+        <p>
+          O MDO ajuda vendedoras a acompanhar clientes vindos da loja, WhatsApp,
+          tráfego pago e indicação, sem depender de papel, memória ou conversas perdidas.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#" data-route-key="inicio" class="btn-primary">
+            Entrar no sistema
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+          <a href="#como-funciona" class="btn-secondary">
+            Ver como funciona
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-preview">
+        <div class="preview-top">
+          <span></span>
+          <strong>Oportunidades</strong>
+          <small>Hoje</small>
+        </div>
+
+        <div class="preview-card preview-card--hot">
+          <div>
+            <strong>Maria Silva</strong>
+            <span>Multifocal + armação</span>
+          </div>
+          <small>Quente</small>
+        </div>
+
+        <div class="preview-card preview-card--warm">
+          <div>
+            <strong>João Pedro</strong>
+            <span>Analisando orçamento</span>
+          </div>
+          <small>Morno</small>
+        </div>
+
+        <div class="preview-card preview-card--cold">
+          <div>
+            <strong>Ana Clara</strong>
+            <span>Quer fazer futuramente</span>
+          </div>
+          <small>Frio</small>
+        </div>
+
+        <div class="preview-stats">
+          <div>
+            <strong>12</strong>
+            <span>Clientes</span>
+          </div>
+
+          <div>
+            <strong>5</strong>
+            <span>Orçamentos</span>
+          </div>
+
+          <div>
+            <strong>3</strong>
+            <span>Vendas</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="section">
+      <div class="section-head">
+        <span>Fluxo simples</span>
+        <h2>Como o sistema funciona</h2>
+      </div>
+
+      <div class="steps-grid">
+        <article class="step-card">
+          <i class="fa-solid fa-user-plus"></i>
+          <h3>1. Cadastre o cliente</h3>
+          <p>Registre nome, telefone, origem e observações importantes.</p>
+        </article>
+
+        <article class="step-card">
+          <i class="fa-solid fa-glasses"></i>
+          <h3>2. Adicione interesses</h3>
+          <p>Cada cliente pode ter vários interesses, como armação, lente ou orçamento.</p>
+        </article>
+
+        <article class="step-card">
+          <i class="fa-solid fa-chart-simple"></i>
+          <h3>3. Acompanhe o status</h3>
+          <p>Veja quem está aguardando mensagem, analisando orçamento ou pronto para fechar.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="recursos" class="section">
+      <div class="section-head">
+        <span>Recursos</span>
+        <h2>Feito para rotina de vendas</h2>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <i class="fa-solid fa-filter"></i>
+          <div>
+            <h3>Filtros rápidos</h3>
+            <p>Separe clientes por origem, status e prioridade.</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <i class="fa-solid fa-temperature-high"></i>
+          <div>
+            <h3>Temperatura do interesse</h3>
+            <p>Identifique clientes frios, mornos e quentes com facilidade.</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <div>
+            <h3>Painel de oportunidades</h3>
+            <p>Visualize os interesses por etapa de venda.</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <i class="fa-solid fa-mobile-screen"></i>
+          <div>
+            <h3>Pronto para celular</h3>
+            <p>Interface pensada para usar rápido durante o atendimento.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Menos cliente perdido. Mais acompanhamento.</h2>
+      <p>Entre no sistema e organize os atendimentos do Mercadão dos Óculos.</p>
+
+      <a href="#" data-route-key="login" class="btn-primary">
+        Acessar login
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </section>
+
+  </main>
+
+  <script type="module" src="../scripts/pages/home.js"></script>
+</body>
+
+</html>

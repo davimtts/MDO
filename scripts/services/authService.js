@@ -1,43 +1,52 @@
-import { getAccessKey } from "../firebase/auth.js";
-import { SESSION_KEY } from "../utils/constants.js";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  watchAuth
+} from "../firebase/auth.js";
 
-export async function loginWithKey(key) {
-  if (!key) {
-    throw new Error("Chave de acesso não informada.");
-  }
+export async function register({ name, email, password }) {
+  const user = await registerUser({
+    name,
+    email,
+    password
+  });
 
-  const user = await getAccessKey(key);
+  return normalizeUser(user);
+}
 
-  if (!user) {
-    throw new Error("Chave de acesso inválida.");
-  }
+export async function login({ email, password }) {
+  const user = await loginUser({
+    email,
+    password
+  });
 
-  if (!user.active) {
-    throw new Error("Chave de acesso desativada.");
-  }
+  return normalizeUser(user);
+}
 
-  const session = {
-    key: user.id,
-    name: user.name,
-    role: user.role,
-    loggedAt: new Date().toISOString()
+export async function logout() {
+  await logoutUser();
+}
+
+export function onAuth(callback) {
+  return watchAuth(user => {
+    callback(user ? normalizeUser(user) : null);
+  });
+}
+
+export function getCurrentUser() {
+  return new Promise(resolve => {
+    onAuth(user => {
+      resolve(user);
+    });
+  });
+}
+
+function normalizeUser(user) {
+  return {
+    id: user.uid,
+    name: user.displayName || "Usuário",
+    email: user.email
   };
-
-  localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-
-  return session;
 }
 
-export function getSession() {
-  const session = localStorage.getItem(SESSION_KEY);
-
-  if (!session) {
-    return null;
-  }
-
-  return JSON.parse(session);
-}
-
-export function logout() {
-  localStorage.removeItem(SESSION_KEY);
-}

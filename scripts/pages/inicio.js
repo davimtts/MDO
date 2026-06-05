@@ -3,7 +3,7 @@ import { loadSharedLayout } from "../app/loadComponents.js";
 await loadSharedLayout();
 
 import { checkAuth } from "../app/auth.js";
-import { getSession, logout } from "../services/authService.js";
+import { logout } from "../services/authService.js";
 import { getDashboardData } from "../services/clientService.js";
 import { loadSettings } from "../services/settingsService.js";
 import { ROUTES } from "../utils/constants.js";
@@ -19,17 +19,16 @@ import {
 } from "../ui/clientPanel.js";
 
 import { isCurrentMonth } from "../utils/dates.js";
-
-await checkAuth();
-await loadSettings();
-
 import { applyNavLinks } from "../ui/navLinks.js";
 import { setActiveNav } from "../ui/activeNav.js";
+
+const user = await checkAuth();
+
+await loadSettings();
 
 applyNavLinks();
 setActiveNav();
 
-const session = getSession();
 
 const userName = document.getElementById("userName");
 
@@ -48,12 +47,12 @@ const pendingCount = document.getElementById("pendingCount");
 const monthlySalesCount = document.getElementById("monthlySalesCount");
 const salesChartBars = document.getElementById("salesChartBars");
 
-if (userName && session?.name) {
-  userName.textContent =  session.name.split(" ")[0];
+if (userName && user?.name) {
+  userName.textContent = user.name.split(" ")[0];
 }
 
-function handleLogout() {
-  logout();
+async function handleLogout() {
+  await logout();
   window.location.href = ROUTES.login;
 }
 

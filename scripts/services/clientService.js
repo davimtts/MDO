@@ -1,23 +1,30 @@
 import { saveClient, getClients, updateClient } from "../firebase/clients.js";
 import { saveItem, getItems, updateItem } from "../firebase/items.js";
-import { getSession } from "./authService.js";
+import { getCurrentUser } from "./authService.js";
 
+async function requireUser() {
+  const user = await getCurrentUser();
 
-export async function getDashboardData() {
-  const session = getSession();
-
-  if (!session) {
+  if (!user) {
     throw new Error("Usuário não autenticado.");
   }
 
-  const clients = await getClients(session.key);
+  return user;
+}
+
+export async function getDashboardData() {
+  const user = await requireUser();
+
+  const clients = await getClients(user.id);
 
   const clientIds = clients.map(client => client.id);
 
   const items = await getItems(clientIds);
 
   const clientsWithItems = clients.map(client => {
-    const clientItems = items.filter(item => item.client_id === client.id);
+    const clientItems = items.filter(item =>
+      item.client_id === client.id
+    );
 
     return {
       ...client,
@@ -32,15 +39,8 @@ export async function getDashboardData() {
   };
 }
 
-
-
-
 export async function createClientWithOptionalItem(clientData, itemData) {
-  const session = getSession();
-
-  if (!session) {
-    throw new Error("Usuário não autenticado.");
-  }
+  const user = await requireUser();
 
   if (!clientData.client_nome.trim()) {
     throw new Error("Nome do cliente é obrigatório.");
@@ -53,7 +53,7 @@ export async function createClientWithOptionalItem(clientData, itemData) {
   const now = new Date().toISOString();
 
   const client = await saveClient({
-    user_id: session.key,
+    user_id: user.id,
     client_nome: clientData.client_nome.trim(),
     client_telefone: clientData.client_telefone.trim(),
     client_origem: clientData.client_origem,
@@ -83,9 +83,9 @@ export async function createClientWithOptionalItem(clientData, itemData) {
   };
 }
 
-
-
 export async function updateClientWithItems(clientData, itemsData) {
+  await requireUser();
+
   const now = new Date().toISOString();
 
   await updateClient(clientData.id, {

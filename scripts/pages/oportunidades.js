@@ -28,7 +28,7 @@ import {
   setClientPanelData
 } from "../ui/clientPanel.js";
 
-await checkAuth();
+const user = await checkAuth();
 await loadSettings();
 
 applyNavLinks();
@@ -47,8 +47,8 @@ let pageData = {
   clientsWithItems: []
 };
 
-function handleLogout() {
-  logout();
+async function handleLogout() {
+  await logout();
   window.location.href = ROUTES.login;
 }
 

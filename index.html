@@ -6,44 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body style="background-color: black;">
 
-  <script type="module">
+<script type="module">
 
-    import { getSession, loginWithKey } from './scripts/services/authService.js';
-    import { ROUTES } from './scripts/utils/constants.js';
+  import { onAuth } from "./scripts/services/authService.js";
+  import { ROUTES } from "./scripts/utils/constants.js";
 
-    const params = new URLSearchParams(window.location.search);
+  let checked = false;
 
-    const key = params.get('key');
+  onAuth(user => {
 
-    async function init() {
+    if (checked) return;
+    checked = true;
 
-      if (key) {
-        try {
-          await loginWithKey(key);
-          window.location.href = ROUTES.inicio;
-          return;
-        } catch (error) {
-          console.error(error);
-          window.location.href = ROUTES.login;
-          return;
-        }
-      }
-
-      const session = getSession();
-      if (session) {
-        window.location.href = ROUTES.inicio;
-        return;
-      }
-
-      window.location.href = ROUTES.login;
-
+    if (user) {
+      window.location.href = ROUTES.inicio;
+      return;
     }
 
-    init();
+    window.location.href = ROUTES.home;
 
-  </script>
+  });
+
+</script>
 
 </body>
 

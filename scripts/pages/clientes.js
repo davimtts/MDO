@@ -3,7 +3,7 @@ import { loadSharedLayout } from "../app/loadComponents.js";
 await loadSharedLayout();
 
 import { checkAuth } from "../app/auth.js";
-import { getSession, logout } from "../services/authService.js";
+import { logout } from "../services/authService.js";
 import { getDashboardData } from "../services/clientService.js";
 import {
   loadSettings,
@@ -37,7 +37,6 @@ import { setActiveNav } from "../ui/activeNav.js";
 applyNavLinks();
 setActiveNav();
 
-const session = getSession();
 
 const logoutButton = document.getElementById("logoutButton");
 const logoutButtonDesktop = document.getElementById("logoutButtonDesktop");
@@ -60,8 +59,8 @@ let pageData = {
   clientsWithItems: []
 };
 
-function handleLogout() {
-  logout();
+async function handleLogout() {
+  await logout();
   window.location.href = ROUTES.login;
 }
 

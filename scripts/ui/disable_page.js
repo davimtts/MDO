@@ -1,3 +1,4 @@
+
 (() => {
   const scriptUrl =
     document.currentScript?.src ||
@@ -300,10 +301,12 @@
     const session = authModule.getSession?.();
 
     const { collection, addDoc, serverTimestamp } = firestoreModule;
+    
+    const currentUser = await authModule.getCurrentUser();
 
     return await addDoc(collection(db, "feedbacks"), {
-      author_name: session?.name || "Não informado",
-      author_id: session?.key || session?.user_id || null,
+      author_name: currentUser?.name || "Não informado",
+      author_id: currentUser?.id || "Não informado",
       message,
       applied: false,
       feedback_date: getToday(),

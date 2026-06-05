@@ -1,145 +1,128 @@
-import { loginWithKey } from "../services/authService.js";
-import { redirectIfLogged } from "../app/auth.js";
+import {
+  login,
+  register,
+  onAuth
+} from "../services/authService.js";
+
 import { ROUTES } from "../utils/constants.js";
 
-redirectIfLogged();
+const loginTab = document.getElementById("loginTab");
+const registerTab = document.getElementById("registerTab");
 
-const form = document.getElementById("loginForm");
-const input = document.getElementById("accessKey");
-const errorBox = document.getElementById("loginError");
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
 
-form.addEventListener("submit", async (event) => {
+const authMessage = document.getElementById("authMessage");
+
+const loginEmail = document.getElementById("loginEmail");
+const loginPassword = document.getElementById("loginPassword");
+
+const registerName = document.getElementById("registerName");
+const registerEmail = document.getElementById("registerEmail");
+const registerPassword = document.getElementById("registerPassword");
+
+let authChecked = false;
+
+onAuth(user => {
+  if (authChecked) return;
+
+  authChecked = true;
+
+  if (user) {
+    window.location.href = ROUTES.inicio;
+  }
+});
+
+function setMode(mode) {
+  const isLogin = mode === "login";
+
+  loginTab.classList.toggle("active", isLogin);
+  registerTab.classList.toggle("active", !isLogin);
+
+  loginForm.classList.toggle("hidden", !isLogin);
+  registerForm.classList.toggle("hidden", isLogin);
+
+  clearMessage();
+}
+
+function setMessage(message, type = "") {
+  authMessage.textContent = message;
+  authMessage.className = `auth-message ${type}`;
+}
+
+function clearMessage() {
+  setMessage("");
+}
+
+function getAuthErrorMessage(error) {
+  const code = error?.code || "";
+
+  const messages = {
+    "auth/invalid-email": "E-mail inválido.",
+    "auth/user-not-found": "Usuário não encontrado.",
+    "auth/wrong-password": "Senha incorreta.",
+    "auth/invalid-credential": "E-mail ou senha incorretos.",
+    "auth/email-already-in-use": "Este e-mail já está cadastrado.",
+    "auth/weak-password": "A senha precisa ter pelo menos 6 caracteres.",
+    "auth/network-request-failed": "Erro de conexão. Verifique sua internet."
+  };
+
+  return messages[code] || "Não foi possível concluir. Tente novamente.";
+}
+
+loginTab.addEventListener("click", () => {
+  setMode("login");
+});
+
+registerTab.addEventListener("click", () => {
+  setMode("register");
+});
+
+loginForm.addEventListener("submit", async event => {
   event.preventDefault();
 
-  const key = input.value.trim();
+  const submitButton = loginForm.querySelector("button[type='submit']");
 
   try {
-    await loginWithKey(key);
+    submitButton.disabled = true;
+    setMessage("Entrando...");
+
+    await login({
+      email: loginEmail.value.trim(),
+      password: loginPassword.value
+    });
+
     window.location.href = ROUTES.inicio;
   } catch (error) {
-    errorBox.textContent = error.message;
+    console.error(error);
+    setMessage(getAuthErrorMessage(error), "error");
+  } finally {
+    submitButton.disabled = false;
   }
 });
 
+registerForm.addEventListener("submit", async event => {
+  event.preventDefault();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * ÍRIS CRM — Login Page
- * scripts/pages/login.js
- *
- * Integrar com authService.js quando pronto.
- */
-
-// --- Elementos ---
-const inputEl    = document.getElementById('accessKey');
-const errorEl    = document.getElementById('loginError');
-const toggleBtn  = document.getElementById('toggleKey');
-const eyeOpen    = toggleBtn.querySelector('.eye-open');
-const eyeClosed  = toggleBtn.querySelector('.eye-closed');
-const submitBtn  = form.querySelector('.login-btn');
-const btnText    = submitBtn.querySelector('.login-btn__text');
-const btnIcon    = submitBtn.querySelector('.login-btn__icon');
-
-// --- Toggle visibilidade da chave ---
-toggleBtn.addEventListener('click', () => {
-  const isHidden = inputEl.type === 'password';
-  inputEl.type = isHidden ? 'text' : 'password';
-
-  eyeOpen.style.display   = isHidden ? 'none' : '';
-  eyeClosed.style.display = isHidden ? 'flex'     : 'none';
-
-  toggleBtn.setAttribute('aria-label', isHidden ? 'Ocultar chave' : 'Mostrar chave');
-  inputEl.focus();
-});
-
-// --- Limpa erro ao digitar ---
-inputEl.addEventListener('input', () => {
-  if (errorEl.classList.contains('visible')) {
-    hideError();
-  }
-  inputEl.classList.remove('has-error');
-});
-
-// --- Submit ---
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const key = inputEl.value.trim();
-
-  if (!key) {
-    showError('Informe a chave de acesso.');
-    inputEl.classList.add('has-error');
-    inputEl.focus();
-    return;
-  }
-
-  setLoading(true);
+  const submitButton = registerForm.querySelector("button[type='submit']");
 
   try {
-    // TODO: substituir pela chamada real ao authService.js
-    // import { login } from '../services/authService.js';
-    // const result = await login(key);
-    // if (result.success) window.location.href = './dashboard.html';
+    submitButton.disabled = true;
+    setMessage("Criando conta...");
 
-    await delay(1400); // simulação
+    await register({
+      name: registerName.value.trim(),
+      email: registerEmail.value.trim(),
+      password: registerPassword.value
+    });
 
-    // Simulação: chave inválida
-    throw new Error('Chave de acesso inválida. Tente novamente.');
+    setMessage("Conta criada com sucesso. Entrando...", "success");
 
-  } catch (err) {
-    showError(err.message || 'Ocorreu um erro. Tente novamente.');
-    inputEl.classList.add('has-error');
-    inputEl.select();
+    window.location.href = ROUTES.inicio;
+  } catch (error) {
+    console.error(error);
+    setMessage(getAuthErrorMessage(error), "error");
   } finally {
-    setLoading(false);
+    submitButton.disabled = false;
   }
 });
-
-// --- Helpers ---
-
-function setLoading(isLoading) {
-  submitBtn.disabled = isLoading;
-
-  if (isLoading) {
-    btnText.textContent = 'Verificando...';
-    btnIcon.style.display = 'none';
-
-    const spinner = document.createElement('span');
-    spinner.className = 'spinner';
-    spinner.setAttribute('aria-hidden', 'true');
-    submitBtn.appendChild(spinner);
-  } else {
-    btnText.textContent = 'Entrar';
-    btnIcon.style.display = '';
-
-    const spinner = submitBtn.querySelector('.spinner');
-    if (spinner) spinner.remove();
-  }
-}
-
-function showError(msg) {
-  errorEl.textContent = msg;
-  errorEl.classList.add('visible');
-}
-
-function hideError() {
-  errorEl.classList.remove('visible');
-}
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
