@@ -102,7 +102,7 @@
     <div class="dashboard-grid">
 
       <!-- Aguardando mensagem -->
-      <section class="panel" aria-label="Aguardando mensagem">
+      <section class="panel" id="pendingPanel" aria-label="Aguardando mensagem">
         <div class="panel__header">
           <h2 class="panel__title">
             <i class="fa-solid fa-clock panel__title-icon" aria-hidden="true"></i>
@@ -128,11 +128,27 @@
             Ver todos <i class="fa-solid fa-arrow-right" style="font-size:10px"></i>
           </button>
         </div>
-        <div id="recentClientsList" class="client-list" role="list"></div>
+
+        <div id="recentClientsList" class="client-list" role="list">
+          <article class="client-row client-row--skeleton">
+            <div class="avatar skeleton-avatar"></div>
+            <div class="client-info">
+              <div class="skeleton-line skeleton-name"></div>
+              <div class="skeleton-line skeleton-sub"></div>
+              <div class="skeleton-pill"></div>
+            </div>
+            <div class="client-meta">
+              <div class="skeleton-line skeleton-price"></div>
+              <div class="skeleton-line skeleton-date"></div>
+            </div>
+          </article>
+        </div>
+
         <div class="client-list--empty" id="recentEmpty">
           <i class="fa-regular fa-user"></i>
           <span>Nenhum cliente ainda</span>
         </div>
+
       </section>
 
       <!-- Gráfico de vendas -->

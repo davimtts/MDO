@@ -44,6 +44,9 @@ const budgetCount = document.getElementById("budgetCount");
 const salesCount = document.getElementById("salesCount");
 const pendingCount = document.getElementById("pendingCount");
 
+const recentEmpty = document.getElementById("recentEmpty");
+const pendingPanel = document.getElementById("pendingPanel");
+
 const monthlySalesCount = document.getElementById("monthlySalesCount");
 const salesChartBars = document.getElementById("salesChartBars");
 
@@ -177,6 +180,8 @@ async function renderDashboard() {
     item.item_status === "aguardando"
   );
 
+  pendingPanel.style.display = pendingItems.length > 0 ? "block" : "none";
+
   pendingCount.textContent = pendingItems.length;
 
   const recent = clientsWithItems.slice(0, 5);
@@ -192,6 +197,9 @@ async function renderDashboard() {
       })
     );
   });
+  if (recent.length === 0 && recentEmpty) {
+    recentEmpty.style.display = "flex";
+  }
 
 
 

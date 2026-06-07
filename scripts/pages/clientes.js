@@ -345,19 +345,22 @@ function renderClients() {
     return;
   }
 
-  if (clientsEmpty) clientsEmpty.style.display = "none";
 
   filteredClients.forEach(client => {
     clientsList.appendChild(renderClientTableRow(client));
   });
 }
 
+
+
 async function loadClientsPage() {
   const data = await getDashboardData();
 
   pageData = data;
 
-  setClientPanelData({ clientsWithItems: data.clientsWithItems });
+  setClientPanelData({
+    clientsWithItems: data.clientsWithItems
+  });
 
   renderClients();
 }
