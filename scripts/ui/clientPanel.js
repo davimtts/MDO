@@ -1,4 +1,7 @@
-import { updateClientWithItems } from "../services/clientService.js";
+import {
+  createClientWithItems,
+  updateClientWithItems
+} from "../services/clientService.js";
 import { showToast } from "./toast.js";
 
 import { formatShortDate } from "../utils/formatters.js";
@@ -16,6 +19,9 @@ import {
 let cache = {
   clientsWithItems: []
 };
+
+let panelMode = "edit";
+let currentClientId = null;
 
 function applyStatusColor(select) {
   const statusMap = getStatusMap();
@@ -113,11 +119,27 @@ export function initClientPanel({ onSuccess } = {}) {
     try {
       clientPanelMessage.textContent = "Salvando...";
 
-      await updateClientWithItems(clientData, itemsData);
+      if (panelMode === "create") {
+
+        await createClientWithItems(
+          clientData,
+          itemsData
+        );
+
+        showToast("Cliente cadastrado.");
+
+      } else {
+
+        await updateClientWithItems(
+          clientData,
+          itemsData
+        );
+
+        showToast("Cliente atualizado.");
+      }
 
       closePanel();
 
-      showToast("Cliente atualizado.");
 
       if (typeof onSuccess === "function") {
         await onSuccess();
@@ -128,8 +150,45 @@ export function initClientPanel({ onSuccess } = {}) {
   });
 }
 
-export function openClientPanel(clientId) {
-  const client = cache.clientsWithItems.find(client => client.id === clientId);
+export function openClientPanel(clientId = null) {
+
+  panelMode = clientId ? "edit" : "create";
+  currentClientId = clientId;
+
+  const title = document.getElementById("clientPanelTitle");
+
+  if (panelMode === "create") {
+
+    document.getElementById("panelClientId").value = "";
+    document.getElementById("panelClientName").value = "";
+    document.getElementById("panelClientPhone").value = "";
+    document.getElementById("panelClientOrigin").value = "loja_fisica";
+    document.getElementById("panelClientObs").value = "";
+
+    renderInterests([]);
+
+    if (title) {
+      title.textContent = "Cadastrar cliente";
+    }
+
+    const submitButton =
+      document.getElementById("clientPanelSubmit");
+
+    if (submitButton) {
+      submitButton.textContent = "Cadastrar cliente";
+    }
+
+    document
+      .getElementById("clientPanel")
+      .classList
+      .remove("hidden");
+
+    return;
+  }
+
+  const client = cache.clientsWithItems.find(
+    client => client.id === clientId
+  );
 
   if (!client) return;
 
@@ -141,7 +200,21 @@ export function openClientPanel(clientId) {
 
   renderInterests(client.items);
 
-  document.getElementById("clientPanel").classList.remove("hidden");
+  if (title) {
+    title.textContent = "Editar cliente";
+  }
+
+  const submitButton =
+    document.getElementById("clientPanelSubmit");
+
+  if (submitButton) {
+    submitButton.textContent = "Salvar alterações";
+  }
+
+  document
+    .getElementById("clientPanel")
+    .classList
+    .remove("hidden");
 }
 
 function closePanel() {

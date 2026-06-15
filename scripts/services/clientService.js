@@ -83,6 +83,44 @@ export async function createClientWithOptionalItem(clientData, itemData) {
   };
 }
 
+export async function createClientWithItems(clientData, itemsData) {
+  const user = await requireUser();
+
+  const now = new Date().toISOString();
+
+  const client = await saveClient({
+    user_id: user.id,
+    client_nome: clientData.client_nome.trim(),
+    client_telefone: clientData.client_telefone.trim(),
+    client_origem: clientData.client_origem,
+    client_obs: clientData.client_obs.trim(),
+    client_data_create: now,
+    client_ult_ctt: now
+  });
+
+  for (const item of itemsData) {
+
+    if (!item.item_nome.trim()) {
+      continue;
+    }
+
+    await saveItem({
+      client_id: client.id,
+      item_nome: item.item_nome.trim(),
+      item_preco: Number(item.item_preco) || 0,
+      item_status: item.item_status,
+      item_temperatura: item.item_temperatura,
+      item_obs: item.item_obs.trim(),
+      item_data_create: now,
+      item_data_ult_ctt: now
+    });
+  }
+
+  return client;
+}
+
+
+
 export async function updateClientWithItems(clientData, itemsData) {
   await requireUser();
 

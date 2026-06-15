@@ -21,7 +21,6 @@ import { renderStatusBadge } from "../ui/statusBadge.js";
 import { applyNavLinks } from "../ui/navLinks.js";
 import { setActiveNav } from "../ui/activeNav.js";
 
-import { initClientCreateModal } from "../ui/clientCreateModal.js";
 import {
   initClientPanel,
   openClientPanel,
@@ -204,11 +203,10 @@ function renderOpportunityCard({ item, client }) {
         <span class="opportunity-card__phone">${client.client_telefone || "Sem telefone"}</span>
       </div>
 
-      ${
-        temperature
-          ? `<span class="temp-badge badge-${temperature.color || "default"}">${temperature.label}</span>`
-          : ""
-      }
+      ${temperature
+      ? `<span class="temp-badge badge-${temperature.color || "default"}">${temperature.label}</span>`
+      : ""
+    }
     </div>
 
     <div class="opportunity-card__status">
@@ -224,10 +222,9 @@ function renderOpportunityCard({ item, client }) {
       <span class="opportunity-card__date">${date}</span>
     </div>
 
-    ${
-      item.item_obs
-        ? `<div class="opportunity-card__obs">${item.item_obs}</div>`
-        : ""
+    ${item.item_obs
+      ? `<div class="opportunity-card__obs">${item.item_obs}</div>`
+      : ""
     }
   `;
 
@@ -316,15 +313,13 @@ if (opportunitySearch) {
   });
 }
 
-initClientCreateModal({
-  onSuccess: async result => {
-    await loadOpportunitiesPage();
+const openClientModalButton = document.getElementById("openClientModal");
 
-    if (result?.client?.id) {
-      openClientPanel(result.client.id);
-    }
-  }
-});
+if (openClientModalButton) {
+  openClientModalButton.addEventListener("click", () => {
+    openClientPanel();
+  });
+}
 
 initClientPanel({
   onSuccess: async () => {

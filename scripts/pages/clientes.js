@@ -21,7 +21,6 @@ import {
 import { renderStatusBadge } from "../ui/statusBadge.js";
 
 
-import { initClientCreateModal } from "../ui/clientCreateModal.js";
 import {
   initClientPanel,
   openClientPanel,
@@ -396,12 +395,13 @@ if (toggleFiltersButton) {
   });
 }
 
-initClientCreateModal({
-  onSuccess: async result => {
-    await loadClientsPage();
-    if (result?.client?.id) openClientPanel(result.client.id);
-  }
-});
+const openClientModalButton = document.getElementById("openClientModal");
+
+if (openClientModalButton) {
+  openClientModalButton.addEventListener("click", () => {
+    openClientPanel();
+  });
+}
 
 initClientPanel({
   onSuccess: async () => await loadClientsPage()

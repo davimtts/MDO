@@ -11,7 +11,6 @@ import { ROUTES } from "../utils/constants.js";
 import { getHighestPriorityItem } from "../utils/itemPriority.js";
 import { renderClientRow } from "../ui/clientRow.js";
 
-import { initClientCreateModal } from "../ui/clientCreateModal.js";
 import {
   initClientPanel,
   openClientPanel,
@@ -216,15 +215,13 @@ async function renderDashboard() {
   });
 }
 
-initClientCreateModal({
-  onSuccess: async result => {
-    await renderDashboard();
+const openClientModalButton = document.getElementById("openClientModal");
 
-    if (result?.client?.id) {
-      openClientPanel(result.client.id);
-    }
-  }
-});
+if (openClientModalButton) {
+  openClientModalButton.addEventListener("click", () => {
+    openClientPanel();
+  });
+}
 
 initClientPanel({
   onSuccess: async () => {
