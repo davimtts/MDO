@@ -77,7 +77,10 @@ function formatOrigin(origin) {
   const labels = {
     trafego_pago: "Tráfego pago",
     loja_fisica: "Loja",
-    indicacao: "Indicação"
+    indicacao: "Indicação",
+    pos_venda: "Pós Venda",
+    aniversariante: "Aniversariante",
+    acao: "Ação"
   };
   return labels[origin] || origin || "—";
 }
@@ -149,9 +152,14 @@ function clientMatchesStatus(client, status) {
 
 function renderOriginCounts() {
   const originAllCount = document.getElementById("originAllCount");
+
   const originStoreCount = document.getElementById("originStoreCount");
   const originPaidCount = document.getElementById("originPaidCount");
   const originReferralCount = document.getElementById("originReferralCount");
+
+  const originAniversarianteCount = document.getElementById("originAniversarianteCount");
+  const originPosVendaCount = document.getElementById("originPosVendaCount");
+  const originAcaoCount = document.getElementById("originAcaoCount");
 
   const baseClients = pageData.clientsWithItems.filter(client => {
     return (
@@ -179,6 +187,24 @@ function renderOriginCounts() {
   if (originReferralCount) {
     originReferralCount.textContent = baseClients.filter(client =>
       client.client_origem === "indicacao"
+    ).length;
+  }
+
+  if (originAniversarianteCount) {
+    originAniversarianteCount.textContent = baseClients.filter(client =>
+      client.client_origem === "aniversariante"
+    ).length;
+  }
+
+  if (originPosVendaCount) {
+    originPosVendaCount.textContent = baseClients.filter(client =>
+      client.client_origem === "pos_venda"
+    ).length;
+  }
+
+  if (originAcaoCount) {
+    originAcaoCount.textContent = baseClients.filter(client =>
+      client.client_origem === "acao"
     ).length;
   }
 }
